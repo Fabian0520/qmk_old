@@ -57,7 +57,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
-    case NUM:
+    case NUM_SPC:
       if (record->event.pressed) {
         layer_on(_NUM);
         update_tri_layer(_MOV, _NUM, _ADJUST);
@@ -65,9 +65,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         layer_off(_NUM);
         update_tri_layer(_MOV, _NUM, _ADJUST);
       }
-      return false;
+      //return false;
       break;
-    case MOV:
+    case MOV_ENT:
       if (record->event.pressed) {
         layer_on(_MOV);
         update_tri_layer(_MOV, _NUM, _ADJUST);
@@ -75,7 +75,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         layer_off(_MOV);
         update_tri_layer(_MOV, _NUM, _ADJUST);
       }
-      return false;
+      //return false;
       break;
      case TMP:
       if (record->event.pressed) {

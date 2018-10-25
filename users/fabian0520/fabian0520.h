@@ -15,6 +15,8 @@
 #define SCRE_DN      LGUI(LSFT(LCTL(KC_A)))
 #define __________   KC_TRNS
 #define XXXXXXXXXX   KC_NO
+#define NUM_SPC      LT(_NUM, KC_SPC)
+#define MOV_ENT      LT(_MOV, KC_ENT)
 
 enum userspace_layers {
   _COLEMAK,
@@ -42,6 +44,8 @@ enum userspace_custom_keycodes {
   SYM,
   NUM,
   MOV,
+  //NUM_SPC = LT(_NUM, KC_SPACE),
+  //MOV_ENT = LT(_MOV, KC_ENTER),
   i3_S_1,
   i3_S_2,
   i3_S_3,
