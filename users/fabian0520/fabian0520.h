@@ -17,6 +17,9 @@
 #define XXXXXXXXXX   KC_NO
 #define NUM_SPC      LT(_NUM, KC_SPC)
 #define MOV_ENT      LT(_MOV, KC_ENT)
+#define MY_CIRC      RALT(RSFT(KC_SCLN))
+#define MY_PARA      RALT(RSFT(KC_S))
+#define MY_EURO      RALT(KC_5)
 
 enum userspace_layers {
   _COLEMAK,

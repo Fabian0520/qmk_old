@@ -16,7 +16,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 * |------+------+------+------+------+------+------+------+------+------+------+------|
 * |    LSFT   |   Z  |   X  |   C  |   V  |   B  |   K  |   M  |   ,  |    .   | RSFT |
 * |------+------+------+------+------+------+------+------+------+------+------+------|
-* |  CTL |  WIN |  ALT |   NUM  |   SPACE   |    ENTER  |   MOV  | ALTGR|  WIN |  CTL |
+* |  CTL |  WIN |  ALT |   NUM  |   SPACE   |    ENTER  | ALTGR|  WIN |  CTL | MOV    |
 * `-----------------------------------------------------------------------------------'
 */
 
@@ -48,7 +48,7 @@ KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_
 
 /* NUM
 * ,-----------------------------------------------------------------------------------.
-* |  ESC |XXXXXX|XXXXXX|XXXXXX|   '  |XXXXXX|   /  |   7  |   8  |   9  |   *  |  DEL |
+* |  ESC |   €  |   §  |   °  |   '  |XXXXXX|   /  |   7  |   8  |   9  |   *  |  DEL |
 * |------+------+------+------+------+------+------+------+------+------+------+------|
 * |  TAB   |   &  |   ^  |   %  |   $  |   _  |   ,  |   4  |   5  |   6  |     +     |
 * |------+------+------+------+------+------+------+------+------+------+------+------|
@@ -59,7 +59,7 @@ KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_
 */
 
  [_NUM] =LAYOUT( \
-KC_TRNS ,   KC_NO  ,   KC_NO  ,   KC_NO  ,  KC_QUOT ,   KC_NO  , KC_SLASH ,   KC_7   ,   KC_8   ,   KC_9   ,  KC_ASTR , KC_TRNS  ,\
+KC_TRNS ,  MY_EURO , MY_PARA  ,  MY_CIRC ,  KC_QUOT ,   KC_NO  , KC_SLASH ,   KC_7   ,   KC_8   ,   KC_9   ,  KC_ASTR , KC_TRNS  ,\
 KC_TRNS ,  S(KC_7) ,  S(KC_6) ,  S(KC_5) ,  S(KC_4) ,S(KC_MINS),  KC_COMM ,   KC_4   ,   KC_5   ,   KC_6   ,  KC_PLUS ,\
 KC_TRNS ,S(KC_SLSH),  S(KC_3) ,  S(KC_2) , S(KC_1)  , KC_EQUAL ,    KC_0  ,   KC_1   ,   KC_2   ,   KC_3   , KC_MINUS ,\
 KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS \
@@ -116,7 +116,7 @@ KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_
 */
 
  [_ADJUST] =LAYOUT( \
-  SCRE_UP ,  QWERTY  ,  COLEMAK ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  , KC_VOLU  ,   KC_NO  ,  KC_NO   ,\
+  SCRE_UP ,  QWERTY  ,  COLEMAK ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  , KC_VOLU  ,   KC_NO  ,  RESET ,\
   SCRE_DN ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  , KC_VOLD  ,   KC_NO  ,\
    KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  , KC_MUTE  ,   KC_NO  ,\
   KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS \
