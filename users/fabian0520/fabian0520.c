@@ -57,6 +57,26 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
+    case NUM:
+      if (record->event.pressed) {
+        layer_on(_NUM);
+        update_tri_layer(_MOV, _NUM, _ADJUST);
+      } else {
+        layer_off(_NUM);
+        update_tri_layer(_MOV, _NUM, _ADJUST);
+      }
+      return false;
+      break;
+    case MOV:
+      if (record->event.pressed) {
+        layer_on(_MOV);
+        update_tri_layer(_MOV, _NUM, _ADJUST);
+      } else {
+        layer_off(_MOV);
+        update_tri_layer(_MOV, _NUM, _ADJUST);
+      }
+      return false;
+      break;
     case NUM_SPC:
       if (record->event.pressed) {
         layer_on(_NUM);
