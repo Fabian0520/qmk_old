@@ -29,6 +29,7 @@ enum userspace_layers {
   _MOV,
   _ADJUST,
   _TMP,
+  _MIDI,
 };
 
 enum tapdances{
