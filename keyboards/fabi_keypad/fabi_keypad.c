@@ -17,6 +17,8 @@
 //#include "is31fl3733.h"
 
 void matrix_init_kb(void) {
+  setPinOutput(C13);
+  writePinHigh(C13);
 	// put your keyboard start-up code here
 	// runs once when the firmware starts up
 
@@ -43,14 +45,14 @@ void led_set_kb(uint8_t usb_led) {
 	led_set_user(usb_led);
 }
 
-const is31_led g_is31_leds[DRIVER_LED_TOTAL] = {
+// const is31_led g_is31_leds[DRIVER_LED_TOTAL] = {
 /* Refer to IS31 manual for these locations
  *   driver
  *   |  R location
  *   |  |       G location
  *   |  |       |       B location
  *   |  |       |       | */
-    {0, L_1,    K_1,    J_1}, //MX1
+    /*{0, L_1,    K_1,    J_1}, //MX1
     {0, I_1,    H_1,    G_1}, //MX2
     {0, F_1,    E_1,    D_1}, //MX3
     {0, C_1,    B_1,    A_1}, //MX4
@@ -69,20 +71,20 @@ const is31_led g_is31_leds[DRIVER_LED_TOTAL] = {
     {0, L_5,    K_5,    J_5}, //MX57
     {0, I_5,    H_5,    G_5}, //MX58
     {0, F_5,    E_5,    D_5},  //MX59
-};
+};*/
 
-const rgb_led g_rgb_leds[DRIVER_LED_TOTAL] = {
+/*const rgb_led g_rgb_leds[DRIVER_LED_TOTAL] = {
 //
 //  MX1,  MX2,  MX3,  MX4, 
 //  MX5,  MX6,  MX7,  MX8,
 //  MX9, MX10, MX11, MX12,
 // MX13, MX14, MX15, MX16,
-// MX17, MX18, MX19,  ---,
+// MX17, MX18, MX19,  ---,*/
 /* {row | col << 4}
  *    |           {x=0..224, y=0..64}
  *    |              |            modifier
  *    |              |         | */
-    {{0|(0<<4)},    {61.0*0, 21.33*0}, 0}, //MX1
+    /*{{0|(0<<4)},    {61.0*0, 21.33*0}, 0}, //MX1
     {{0|(1<<4)},    {61.0*0, 21.33*1}, 0}, //MX2
     {{0|(2<<4)},    {61.0*0, 21.33*2}, 0}, //MX3
     {{0|(3<<4)},    {61.0*0, 21.33*3}, 0}, //MX4
@@ -101,4 +103,4 @@ const rgb_led g_rgb_leds[DRIVER_LED_TOTAL] = {
     {{4|(0<<4)},    {61.0*4, 21.33*0}, 0}, //MX17
     {{4|(1<<4)},    {61.0*4, 21.33*1}, 0}, //MX18
     {{4|(2<<4)},    {61.0*4, 21.33*2}, 0}  //MX19
-};
+};*/

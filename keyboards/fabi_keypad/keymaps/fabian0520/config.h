@@ -34,9 +34,9 @@
 
 #endif
 
-#define ONESHOT_TAP_TOGGLE 3  /* Tapping this number of times holds the key until tapped this number of times again. */
-#define ONESHOT_TIMEOUT 5000  /* Time (in ms) before the one shot key is released */
-#define TAPPING_TERM 200
+//#define ONESHOT_TAP_TOGGLE 3  /* Tapping this number of times holds the key until tapped this number of times again. */
+//#define ONESHOT_TIMEOUT 5000  /* Time (in ms) before the one shot key is released */
+//#define TAPPING_TERM 200
 //#define RETRO_TAPPING
 //#define IGNORE_MOD_TAP_INTERRUPT
 
@@ -46,7 +46,7 @@
 // #define RGBLIGHT_SAT_STEP 17
 // #define RGBLIGHT_VAL_STEP 17
 // #define RGBLIGHT_LIMIT_VAL 255
-#define i3_NAVIGATION_ENABLE
-#define CUSTOM_SHIFT_ENABLE
-#define ESC_CAPS_ENABLE
+//#define i3_NAVIGATION_ENABLE
+//#define CUSTOM_SHIFT_ENABLE
+//#define ESC_CAPS_ENABLE
 // place overrides here

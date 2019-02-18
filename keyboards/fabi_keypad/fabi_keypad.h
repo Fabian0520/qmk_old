@@ -17,7 +17,7 @@
 #define FABI_KEYPAD_H
 
 #include "quantum.h"
-#include "rgb_matrix.h"
+//#include "rgb_matrix.h"
 
 /* This a shortcut to help you visually see your layout.
  *
@@ -41,4 +41,5 @@
     { K30, K31, K32, K33 }, \
     { K40, K41, K42, KC_NO } \
 }
+
 #endif
