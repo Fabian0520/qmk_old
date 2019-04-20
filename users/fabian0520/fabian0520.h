@@ -27,9 +27,9 @@ enum userspace_layers {
   _NUM,
   _SYM, //Gleicher Layer wie FUNC1. Brauche ich nur um mit beiden Tasten in den ADJUST-Layer zu kommen.
   _MOV,
+  _MIDI,
   _ADJUST,
   _TMP,
-  _MIDI,
 };
 
 enum tapdances{
@@ -48,6 +48,7 @@ enum userspace_custom_keycodes {
   SYM,
   NUM,
   MOV,
+  MIDI,
   //NUM_SPC = LT(_NUM, KC_SPACE),
   //MOV_ENT = LT(_MOV, KC_ENTER),
   i3_S_1,

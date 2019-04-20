@@ -95,7 +95,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_SYM] =LAYOUT_planck_grid( 
- KC_TRNS ,  KC_F12   , KC_F11   , KC_F10   , KC_F9    ,  KC_NO   , KC_PLUS  ,   TD_BS    , KC_RBRC  ,  TD_BA   ,  KC_GT   ,  KC_DEL  , 
+ KC_TRNS ,  KC_F12   , KC_F11   , KC_F10   , KC_F9    ,  KC_NO   , KC_PLUS  ,   TD_BS    , KC_RBRC  ,  TD_BA   ,  KC_GT   , KC_TRNS  , 
  KC_TRNS ,  KC_F8    , KC_F7    , KC_F6    , KC_F5    ,  KC_NO   , KC_MINUS ,   TD_BR    , KC_RPRN  ,  TD_BC   , KC_RCBR  , KC_TRNS , 
  KC_TRNS ,  KC_F4    , KC_F3    , KC_F2    , KC_F1    ,  KC_NO   , KC_EQUAL ,  KC_PIPE   ,  KC_BSLS ,  KC_QUES ,  KC_GRAVE, KC_TRNS , 
  KC_TRNS ,  KC_TRNS  , KC_TRNS  , KC_TRNS  , KC_TRNS  , KC_TRNS  , KC_TRNS  ,  KC_TRNS   , KC_TRNS  , KC_TRNS  ,  KC_TRNS ,  KC_TRNS
@@ -119,9 +119,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS
  ), 
 
+ [_MIDI] =LAYOUT_planck_grid(
+   KC_NO   ,   KC_NO   ,   MI_Cs   ,   MI_Ds   ,   KC_NO   ,   MI_Fs   ,   MI_Gs   ,   MI_As   ,   KC_NO   ,   KC_NO   ,   KC_NO   ,   KC_NO   ,
+   KC_NO   ,    MI_C   ,    MI_D   ,    MI_E   ,    MI_F   ,    MI_G   ,    MI_A   ,    MI_B   ,   KC_NO   ,   KC_NO   ,   KC_NO   ,   KC_NO   ,
+   KC_NO   ,   KC_NO   ,   KC_NO   ,   KC_NO   ,   KC_NO   ,   KC_NO   ,   KC_NO   ,   KC_NO   ,   KC_NO   ,   KC_NO   ,   KC_NO   ,   KC_NO   ,
+   KC_TRNS ,   KC_TRNS ,   KC_TRNS ,   KC_TRNS ,   KC_TRNS ,  KC_TRNS  ,  KC_TRNS  ,  KC_TRNS  ,  KC_TRNS  ,  KC_TRNS  ,  KC_TRNS  ,  KC_TRNS
+   ),
+
 /* ADJUST
  * ,-----------------------------------------------------------------------------------.
- * |SC_UP |QWERTY|COLEMA|      |      |      |      |      |      |      |      |VOL_UP|
+ * |SC_UP |QWERTY|COLEMA| MIDI |      |      |      |      |      |      |      |VOL_UP|
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * |SC_DWN|      |      |      |      |      |      |      |      |      |      |VOL_DN|
  * |------+------+------+------+------+------|------+------+------+------+------+------|
@@ -131,9 +138,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_ADJUST] =LAYOUT_planck_grid(
-  SCRE_UP ,  QWERTY  ,  COLEMAK ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,  KC_VOLU ,
-  SCRE_DN ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,  KC_VOLD ,
-   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,  KC_MUTE ,
+  SCRE_UP ,  QWERTY  ,  COLEMAK ,   MIDI   ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,  KC_VOLU ,
+  SCRE_DN ,   MU_ON  ,   MU_OFF ,   MU_TOG ,  MU_MOD  ,  CK_TOGG ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,  KC_VOLD ,
+   KC_NO  ,   MI_ON  ,   MI_OFF ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,  KC_MUTE ,
   KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS , KC_TRNS  
  ), 
 };
