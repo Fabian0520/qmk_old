@@ -575,8 +575,6 @@ void led_set_user(uint8_t usb_led)
 {
     static uint8_t old_usb_led = 0;
 
-    _delay_ms(10); // gets rid of tick
-
     if ((usb_led & (1<<USB_LED_CAPS_LOCK)) && !(old_usb_led & (1<<USB_LED_CAPS_LOCK)))
     {
             // If CAPS LK LED is turning on...

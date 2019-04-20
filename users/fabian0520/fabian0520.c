@@ -7,23 +7,30 @@ bool isMyShift = false; // This is the flag we'll use to keep track of when shif
 uint16_t my_kc = KC_NO; // Always KC_NO or whichever custom keycode (or its shifted partner) was most recently pressed
 bool isCaps = true;
 
+#ifdef AUDIO_ENABLE
+
+float tone_my_startup[][2] = SONG(QWERTY_SOUND);
+float tone_my_goodbye[][2] = SONG(QWERTY_SOUND);
+
+float tone_audio_on[][2]   = SONG(CLOSE_ENCOUNTERS_5_NOTE);
+float tone_music_on[][2]   = SONG(DOE_A_DEER);
+float tone_caps_on[][2]    = SONG(ZELDA_TREASURE);
+float tone_caps_off[][2]   = SONG(ZELDA_TREASURE);
+float tone_numlk_on[][2]   = SONG(NUM_LOCK_ON_SOUND);
+float tone_numlk_off[][2]  = SONG(NUM_LOCK_OFF_SOUND);
+float tone_scroll_on[][2]  = SONG(SCROLL_LOCK_ON_SOUND);
+float tone_scroll_off[][2] = SONG(SCROLL_LOCK_OFF_SOUND);
+float music_scale[][2]     = SONG(MUSIC_SCALE_SOUND);
+
+#endif /* AUDIO_ENABLE */
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     #ifdef i3_NAVIGATION_ENABLE
         static uint8_t shift_esc_shift_mask;
     #endif
-/*
-    if (record->event.pressed){
-            if (isCaps) {
-        if (host_keyboard_leds() & (1<<USB_LED_CAPS_LOCK) ){
-                rgblight_setrgb_at(255,0,0,0);
-                isCaps = !isCaps;
-            }
-            } else {
-                rgblight_setrgb_at(0,255,0,0);
-                isCaps = !isCaps;
-            }
-        }
-*/
+}
+
+
   switch (keycode) {
     #ifdef ESC_CAPS_ENABLE
         case KC_ESC:
@@ -312,3 +319,25 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
     return true;
 }
+
+// siehe keyboards/planck/keymaps/zrichard/keymap.c 
+
+#ifdef AUDIO_ENABLE
+
+void led_set_user(uint8_t usb_led)
+{
+    static uint8_t old_usb_led = 0;
+
+    if ((usb_led & (1<<USB_LED_CAPS_LOCK)) && !(old_usb_led & (1<<USB_LED_CAPS_LOCK)))
+    {
+            // If CAPS LK LED is turning on...
+            PLAY_SONG(tone_caps_on);
+    }
+    else if (!(usb_led & (1<<USB_LED_CAPS_LOCK)) && (old_usb_led & (1<<USB_LED_CAPS_LOCK)))
+    {
+            // If CAPS LK LED is turning off...
+            PLAY_SONG(tone_caps_off);
+    }
+    old_usb_led = usb_led;
+}
+#endif /* AUDIO_ENABLE */
