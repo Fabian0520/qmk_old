@@ -28,8 +28,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     #ifdef i3_NAVIGATION_ENABLE
         static uint8_t shift_esc_shift_mask;
     #endif
-}
-
 
   switch (keycode) {
     #ifdef ESC_CAPS_ENABLE
