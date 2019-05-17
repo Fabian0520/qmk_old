@@ -24,8 +24,16 @@ extern keymap_config_t keymap_config;
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT( /* Base */
     KC_2,  KC_3,\
-    KC_0,  KC_1\
+    KC_0,  KC_NUMLOCK\
   ),
 };
 
-
+/*
+void led_set_user(uint8_t usb_led) {
+    if (IS_LED_ON(usb_led, USB_LED_NUM_LOCK)) {
+        writePinLow(A13);
+    } else {
+        writePinHigh(A13);
+    }
+}
+*/

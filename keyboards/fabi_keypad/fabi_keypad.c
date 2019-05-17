@@ -17,8 +17,8 @@
 //#include "is31fl3733.h"
 
 void matrix_init_kb(void) {
-  setPinOutput(A13);
-  writePinHigh(A13);
+    setPinOutput(A13);
+    writePinLow(A13);
 	// put your keyboard start-up code here
 	// runs once when the firmware starts up
 
@@ -39,10 +39,15 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
 	return process_record_user(keycode, record);
 }
 
+
 void led_set_kb(uint8_t usb_led) {
 	// put your keyboard LED indicator (ex: Caps Lock LED) toggling code here
+    if (IS_LED_ON(usb_led, USB_LED_NUM_LOCK)) {
+        writePinLow(A13);
+    } else {
+        writePinHigh(A13);
+    }
 
-	led_set_user(usb_led);
 }
 
 // const is31_led g_is31_leds[DRIVER_LED_TOTAL] = {
