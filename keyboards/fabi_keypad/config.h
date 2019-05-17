@@ -28,8 +28,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define DESCRIPTION     A custom keypad
 
 /* key matrix size */
-#define MATRIX_ROWS 5
-#define MATRIX_COLS 4
+#define MATRIX_ROWS 2
+#define MATRIX_COLS 2
 
 /*
  * Keyboard Matrix Assignments
@@ -41,8 +41,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *                  ROW2COL = ROW = Anode (+), COL = Cathode (-, marked on diode)
  *
 */
-#define MATRIX_ROW_PINS { B13, B14, B15, A8 , B12 }
-#define MATRIX_COL_PINS { A6, A7, B0, B1 }
+#define MATRIX_ROW_PINS { B12, B13}
+#define MATRIX_COL_PINS { B15, B14}
 //#define UNUSED_PINS
 
 #define DEBOUNCE 6

@@ -17,8 +17,8 @@
 //#include "is31fl3733.h"
 
 void matrix_init_kb(void) {
-  setPinOutput(C13);
-  writePinHigh(C13);
+  setPinOutput(A13);
+  writePinHigh(A13);
 	// put your keyboard start-up code here
 	// runs once when the firmware starts up
 
