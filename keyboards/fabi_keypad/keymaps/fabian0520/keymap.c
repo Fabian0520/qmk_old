@@ -24,7 +24,7 @@ extern keymap_config_t keymap_config;
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT( /* Base */
     KC_2,  KC_3,\
-    KC_0,  KC_NUMLOCK\
+    KC_0,  KC_CAPSLOCK\
   ),
 };
 
