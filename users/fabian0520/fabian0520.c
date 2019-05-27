@@ -346,7 +346,7 @@ void led_set_user(uint8_t usb_led)
 #endif /* AUDIO_ENABLE */
 
 #if UNICODE_ENABLE
-void matrix_init_user (void) {
+void eeconfig_init_user (void) {
     set_unicode_input_mode(UC_LNX);
 };
 #endif
