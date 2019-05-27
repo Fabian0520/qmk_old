@@ -327,7 +327,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 // siehe keyboards/planck/keymaps/zrichard/keymap.c 
 
 #ifdef AUDIO_ENABLE
-
 void led_set_user(uint8_t usb_led)
 {
     static uint8_t old_usb_led = 0;
@@ -345,3 +344,9 @@ void led_set_user(uint8_t usb_led)
     old_usb_led = usb_led;
 }
 #endif /* AUDIO_ENABLE */
+
+#if UNICODE_ENABLE
+void eeconfig_init_user (void) {
+    set_unicode_input_mode(UC_LNX);
+};
+#endif

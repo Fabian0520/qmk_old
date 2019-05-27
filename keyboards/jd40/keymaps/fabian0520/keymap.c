@@ -2,8 +2,8 @@
 #include "action_layer.h"
 #include "eeconfig.h"
 #include "fabian0520.h"
+#include "unicode_fabi.h"
 extern keymap_config_t keymap_config;
-
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -125,8 +125,8 @@ KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_
 */
 
  [_ADJUST] =LAYOUT( \
-  SCRE_UP ,  QWERTY  ,  COLEMAK ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  , KC_VOLU  ,   KC_NO  ,  RESET ,\
-  SCRE_DN ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  , KC_VOLD  ,   KC_NO  ,\
+  SCRE_UP ,  QWERTY  ,  COLEMAK ,  X(STAR) ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  , KC_VOLU  ,   KC_NO  ,  RESET ,\
+  SCRE_DN ,  UC_MOD  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  , KC_VOLD  ,   KC_NO  ,\
    KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  , KC_MUTE  ,   KC_NO  ,\
   KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS \
  ),
