@@ -56,3 +56,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //#define MIDI_ADVANCED
 //#define MIDI_TONE_KEYCODE_OCTAVES 1
 #define UNICODE_SELECTED_MODES UC_LNX, UC_WINC
+#define NO_ACTION_MACRO
+#define NO_ACTION_FUNCTION
