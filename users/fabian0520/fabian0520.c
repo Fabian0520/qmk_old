@@ -24,6 +24,39 @@ float music_scale[][2]     = SONG(MUSIC_SCALE_SOUND);
 
 #endif /* AUDIO_ENABLE */
 
+// Alternativer Weg mit den Layern umzugehen
+/*
+uint32_t layer_state_set_user(uint32_t state) {
+	state = update_tri_layer_state(state, _NUM, _MOV, _ADJUST);
+	switch (biton32(state)) {
+        case _NUM:
+          #ifdef RGBLIGHT_ENABLE 
+    	  	rgblight_sethsv_noeeprom(HSV_GREEN);
+          #endif
+          //return false;
+          break;
+        case _MOV:
+          #ifdef RGBLIGHT_ENABLE 
+    	  	rgblight_sethsv_noeeprom(HSV_BLUE);
+          #endif
+          //return false;
+          break;
+        case _ADJUST:
+          #ifdef RGBLIGHT_ENABLE 
+    	  	rgblight_sethsv_noeeprom(HSV_RED);
+          #endif
+          //return false;
+          break;
+        default:
+    	  	rgblight_sethsv_noeeprom(HSV_GOLD);
+            break;
+
+
+    }
+	return state;
+}
+*/
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     #ifdef i3_NAVIGATION_ENABLE
         static uint8_t shift_esc_shift_mask;
@@ -44,11 +77,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             return false;
             break;
     #endif
+// ------------------- Layer Code --------------------------------
     case COLEMAK:
       if (record->event.pressed) {
         set_single_persistent_default_layer(_COLEMAK);
         #ifdef UNDERGLOW_ENABLE
              rgblight_sethsv(180,255,255);
+        #endif
+        #ifdef RGBLIGHT_ENABLE 
+			rgblight_sethsv_noeeprom(HSV_GREEN);
         #endif
       }
       return false;
@@ -132,6 +169,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
+      
     //------------------------------------------------------
     #ifdef i3_NAVIGATION_ENABLE
         case i3_S_1:
