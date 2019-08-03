@@ -1,4 +1,5 @@
 #include "fabian0520.h"
+#include "tap_fabi.h"
 
 #define MODS_CTRL_MASK  (MOD_BIT(KC_LSHIFT)|MOD_BIT(KC_RSHIFT))
 
@@ -56,11 +57,18 @@ uint32_t layer_state_set_user(uint32_t state) {
 }
 */
 
+void set_keylog(uint16_t keycode, keyrecord_t *record);
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     #ifdef i3_NAVIGATION_ENABLE
         static uint8_t shift_esc_shift_mask;
     #endif
 
+#ifdef SSD1306OLED
+    set_keylog(keycode, record);
+#endif
+    // set_timelog();
+    
   switch (keycode) {
     #ifdef ESC_CAPS_ENABLE
         case KC_ESC:

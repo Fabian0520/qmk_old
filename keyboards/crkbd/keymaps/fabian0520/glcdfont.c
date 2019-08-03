@@ -1,5 +1,3 @@
-#pragma once
-
 #ifdef __AVR__
  #include <avr/io.h>
  #include <avr/pgmspace.h>
@@ -9,6 +7,8 @@
  #define PROGMEM
 #endif
 
+//#ifndef FONT5X7_H
+//#define FONT5X7_H
 // Helidox 8x6 font with QMK Firmware Logo
 // Online editor: http://teripom.x0.com/
 
@@ -238,3 +238,4 @@ const unsigned char font[] PROGMEM = {
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 };
+//#endif // FONT5X7_H
