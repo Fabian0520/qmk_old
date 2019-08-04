@@ -13,8 +13,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "action_layer.h"
-#include "eeconfig.h"
 #include "fabian0520.h"
 #include "unicode_fabi.h"
 extern keymap_config_t keymap_config;

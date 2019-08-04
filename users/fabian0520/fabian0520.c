@@ -1,5 +1,4 @@
 #include "fabian0520.h"
-#include "tap_fabi.h"
 
 #define MODS_CTRL_MASK  (MOD_BIT(KC_LSHIFT)|MOD_BIT(KC_RSHIFT))
 
@@ -9,18 +8,18 @@ bool isCaps = true;
 
 #ifdef AUDIO_ENABLE
 
-float tone_my_startup[][2] = SONG(QWERTY_SOUND);
-float tone_my_goodbye[][2] = SONG(QWERTY_SOUND);
+float tone_my_startup[][2] = SONG(f_QWERTY_SOUND);
+float tone_my_goodbye[][2] = SONG(f_QWERTY_SOUND);
 
-float tone_audio_on[][2]   = SONG(CLOSE_ENCOUNTERS_5_NOTE);
-float tone_music_on[][2]   = SONG(DOE_A_DEER);
-float tone_caps_on[][2]    = SONG(ZELDA_TREASURE);
-float tone_caps_off[][2]   = SONG(ZELDA_TREASURE);
-float tone_numlk_on[][2]   = SONG(NUM_LOCK_ON_SOUND);
-float tone_numlk_off[][2]  = SONG(NUM_LOCK_OFF_SOUND);
-float tone_scroll_on[][2]  = SONG(SCROLL_LOCK_ON_SOUND);
-float tone_scroll_off[][2] = SONG(SCROLL_LOCK_OFF_SOUND);
-float music_scale[][2]     = SONG(MUSIC_SCALE_SOUND);
+float tone_audio_on[][2]   = SONG(f_CLOSE_ENCOUNTERS_5_NOTE);
+float tone_music_on[][2]   = SONG(f_DOE_A_DEER);
+float tone_caps_on[][2]    = SONG(f_ZELDA_TREASURE);
+float tone_caps_off[][2]   = SONG(f_ZELDA_TREASURE);
+float tone_numlk_on[][2]   = SONG(f_NUM_LOCK_ON_SOUND);
+float tone_numlk_off[][2]  = SONG(f_NUM_LOCK_OFF_SOUND);
+float tone_scroll_on[][2]  = SONG(f_SCROLL_LOCK_ON_SOUND);
+float tone_scroll_off[][2] = SONG(f_SCROLL_LOCK_OFF_SOUND);
+float music_scale[][2]     = SONG(f_MUSIC_SCALE_SOUND);
 
 #endif /* AUDIO_ENABLE */
 

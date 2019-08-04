@@ -4,6 +4,9 @@
 #ifdef TAP_DANCE_ENABLE
 #   include "tap_fabi.h"
 #endif // TAP_DANCE_ENABLE
+#include "fabis_songs.h"
+#include "action_layer.h"
+#include "eeconfig.h"
 #ifndef USERSPACE
 #define USERSPACE
 

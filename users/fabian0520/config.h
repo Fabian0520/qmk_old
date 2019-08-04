@@ -24,6 +24,10 @@
 #endif  // !AUDIO_ENABLE
 */
 
+#ifdef AUDIO_ENABLE
+    #include "fabis_songs.h"
+#endif  // !AUDIO_ENABLE
+
 #ifdef RGBLIGHT_ENABLE
 #    define RGBLIGHT_SLEEP
 #    undef RGBLIGHT_ANIMATIONS
