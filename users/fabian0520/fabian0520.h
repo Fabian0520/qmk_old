@@ -1,7 +1,11 @@
+#pragma once
+#include "quantum.h"
+#include "eeprom.h"
+#ifdef TAP_DANCE_ENABLE
+#   include "tap_fabi.h"
+#endif // TAP_DANCE_ENABLE
 #ifndef USERSPACE
 #define USERSPACE
-
-#include "quantum.h"
 
 #define OSM_ALT      OSM(MOD_LALT)
 #define OSM_GUI      OSM(MOD_LGUI)
