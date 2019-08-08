@@ -29,12 +29,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // #define EE_HANDS
 
 #define SSD1306OLED
+#define OLED_FONT_H "keyboards/crkbd/keymaps/fabian0520/glcdfont.c"
 
 #define USE_SERIAL_PD2
 
 #ifdef RGBLIGHT_ENABLE
     #undef RGBLED_NUM
-    #define RGBLIGHT_ANIMATIONS
+    //#define RGBLIGHT_ANIMATIONS
     #define RGBLED_NUM 27
     #define RGBLIGHT_LIMIT_VAL 120
     #define RGBLIGHT_HUE_STEP 10
@@ -70,7 +71,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #   define DISABLE_RGB_MATRIX_DUAL_BEACON
 #   define DISABLE_RGB_MATRIX_RAINBOW_BEACON
 #   define DISABLE_RGB_MATRIX_RAINBOW_PINWHEELS
-#   define DISABLE_RGB_MATRIX_RAINDROPS
+//#   define DISABLE_RGB_MATRIX_RAINDROPS
 #   define DISABLE_RGB_MATRIX_JELLYBEAN_RAINDROPS
 #   define DISABLE_RGB_MATRIX_TYPING_HEATMAP
 #   define DISABLE_RGB_MATRIX_DIGITAL_RAIN
@@ -88,9 +89,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #   define DISABLE_RGB_MATRIX_SOLID_MULTISPLASH
 #endif
 
-#define ONESHOT_TAP_TOGGLE 3  /* Tapping this number of times holds the key until tapped this number of times again. */
-#define ONESHOT_TIMEOUT 5000  /* Time (in ms) before the one shot key is released */
-#define TAPPING_TERM 200
 //#define TAPPING_FORCE_HOLD
 //#define RETRO_TAPPING
 //#define IGNORE_MOD_TAP_INTERRUPT

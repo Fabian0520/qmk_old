@@ -57,7 +57,6 @@ uint32_t layer_state_set_user(uint32_t state) {
 }
 */
 
-void set_keylog(uint16_t keycode, keyrecord_t *record);
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     #ifdef i3_NAVIGATION_ENABLE
@@ -65,7 +64,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     #endif
 
 #ifdef SSD1306OLED
-    set_keylog(keycode, record);
+    //set_keylog(keycode, record);
+    void set_keylog(uint16_t keycode, keyrecord_t *record);
 #endif
     // set_timelog();
     
