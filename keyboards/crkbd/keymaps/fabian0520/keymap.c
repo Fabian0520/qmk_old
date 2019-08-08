@@ -1,4 +1,5 @@
 #include "fabian0520.h"
+#include "crkbd.h"
 //#include "action_layer.h"
 //#include "eeconfig.h"
 //#include "quantum.h"
@@ -6,6 +7,9 @@
 #include QMK_KEYBOARD_H
 
 extern keymap_config_t keymap_config;
+static uint16_t frame_timer;
+static uint8_t frame_number;
+//static bool frame_number=false;
 
 #ifdef RGBLIGHT_ENABLE
 //Following line allows macro to read current RGB settings
@@ -20,14 +24,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_COLEMAK] =LAYOUT( 
    KC_ESC ,  KC_Q   ,  KC_W   ,   KC_F  ,   KC_P   ,   KC_G   ,        KC_J   ,   KC_L   ,   KC_U   ,   KC_Y   , KC_SCLN  , KC_BSPC ,
    LT(_SYM,KC_TAB)  ,  KC_A   ,  KC_R   ,   KC_S   ,   KC_T   ,        KC_D   ,   KC_H   ,   KC_N   ,   KC_E   ,   KC_I   ,  KC_O    , KC_DEL  ,
-   KC_LSFT,  KC_Z   ,  KC_X   ,   KC_C  ,   KC_V   ,   KC_B   ,        KC_K   ,   KC_M   ,  MY_COMM ,  MY_DOT  , KC_QUOT  , TD_SFT_CAP ,
+   KC_LSFT,  KC_Z   ,  KC_X   ,   KC_C  ,   KC_V   ,   KC_B   ,        KC_K   ,   KC_M   ,  MY_COMM ,  MY_DOT  , KC_QUOT  , OSM(MOD_LSFT) ,
                                 KC_LCTL ,  NUM_SPC ,  KC_LGUI ,       KC_RGUI ,  MOV_ENT ,  KC_RALT  
  ), 
 
 [_QWERTY] =LAYOUT( 
    KC_ESC ,  KC_Q   ,  KC_W   ,   KC_E   ,   KC_R   ,   KC_T   ,   KC_Y   ,   KC_U   ,   KC_I   ,   KC_O   , KC_P     , KC_BSPC ,
    KC_TAB ,  KC_A   ,  KC_S   ,   KC_D   ,   KC_F   ,   KC_G   ,   KC_H   ,   KC_J   ,   KC_K   ,   KC_L   , KC_SCLN  , KC_ENT  ,
-   KC_LSFT,  KC_Z   ,  KC_X   ,   KC_C   ,   KC_V   ,   KC_B   ,   KC_N   ,   KC_M   ,  MY_COMM ,  MY_DOT  , KC_QUOT  , TD_SFT_CAP ,
+   KC_LSFT,  KC_Z   ,  KC_X   ,   KC_C   ,   KC_V   ,   KC_B   ,   KC_N   ,   KC_M   ,  MY_COMM ,  MY_DOT  , KC_QUOT  , OSM(MOD_LSFT) ,
                                 OSM_ALT  ,  NUM_SPC ,  NUM_SPC ,  MOV_ENT ,  MOV_ENT , KC_RALT  
  ), 
 
@@ -60,76 +64,178 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  ) 
 };
 
-int RGB_current_mode;
 
-void persistent_default_layer_set(uint16_t default_layer) {
-  eeconfig_update_default_layer(default_layer);
-  default_layer_set(default_layer);
+#ifdef OLED_DRIVER_ENABLE
+
+void render_frame(uint8_t frame) {
+  static const char PROGMEM animation[3][3][6] = {
+      /*
+          {0x80,0x81,0x82,0x83,0x84,0x85,0}//x86,0x87,0x88,0x89,0x8a,0x8b,0x8c,0x8d,0x8e,0x8f,0x90,0x91,0x92,0x93,0x94,0}
+          {0xa0,0xa1,0xa2,0xa3,0xa4,0xa5,0}//xa6,0xa7,0xa8,0xa9,0xaa,0xab,0xac,0xad,0xae,0xaf,0xb0,0xb1,0xb2,0xb3,0xb4,0}
+          {0xc0,0xc1,0xc2,0xc3,0xc4,0xc5,0}//xc6,0xc7,0xc8,0xc9,0xca,0xcb,0xcc,0xcd,0xce,0xcf,0xd0,0xd1,0xd2,0xd3,0xd4,0}
+  */
+
+      {
+          {0x80,0x81,0x82,0x83,0x84,0},
+          {0xa0,0xa1,0xa2,0xa3,0xa4,0},
+          {0xc0,0xc1,0xc2,0xc3,0xc4,0}
+      },
+      {
+          {0x85,0x86,0x87,0},
+          {0xa5,0xa6,0xa7,0},
+          {0xc5,0xc6,0xc7,0}
+      },
+      {
+          {0x88,0x89,0x8a,0x8b,0},
+          {0xa8,0xa9,0xaa,0xab,0},
+          {0xc8,0xc9,0xca,0xcb,0}
+      }
+  };
+  oled_write_ln_P(animation[frame][0], false);
+  oled_write_ln_P(animation[frame][1], false);
+  oled_write_ln_P(animation[frame][2], false);
 }
 
-// Setting ADJUST layer RGB back to default
-void update_tri_layer_RGB(uint8_t layer1, uint8_t layer2, uint8_t layer3) {
-  if (IS_LAYER_ON(layer1) && IS_LAYER_ON(layer2)) {
-    layer_on(layer3);
-  } else {
-    layer_off(layer3);
+/*
+void oled_task_user(void) {
+  // Host Keyboard Layer Status
+  if(timer_elapsed(frame_timer)>100){
+    render_logo();
   }
 }
+*/
+#endif
 
-void matrix_init_user(void) {
-    #ifdef RGBLIGHT_ENABLE
-      RGB_current_mode = rgblight_config.mode;
-    #endif
-    //SSD1306 OLED init, make sure to add #define SSD1306OLED in config.h
-    #ifdef SSD1306OLED
-        iota_gfx_init(!has_usb());   // turns on the display
-    #endif
+void keyboard_post_init_user(void) {
+    frame_timer = timer_read();
+    frame_number = 0;
 }
 
-//SSD1306 OLED update loop, make sure to add #define SSD1306OLED in config.h
+void render_primary(void){
+    oled_write("Test String4", false);
+}
+
+void oled_task_user(void){
+    if(is_master){
+        //  Funktion, was auf das erste Desplay geschrieben werden soll
+        if(timer_elapsed(frame_timer)>150){
+            switch(frame_number){
+                case 0:
+                 render_frame(frame_number);
+                 frame_number = 1;
+                 break;
+                case 1:
+                 render_frame(frame_number);
+                 frame_number = 2;
+                 break;
+                case 2:
+                 render_frame(frame_number);
+                 frame_number = 3;
+                 break;
+                case 3:
+                 render_frame(frame_number-2);
+                 frame_number = 0;
+                 break;
+             }
+            frame_timer = timer_read();
+        }
+    }else{
+        if(timer_elapsed(frame_timer)>200){
+            switch(frame_number){
+                case 0:
+                 render_frame(frame_number);
+                 frame_number += 1;
+                 break;
+                case 1:
+                 render_frame(frame_number);
+                 frame_number += 1;
+                 break;
+                case 2:
+                 render_frame(frame_number);
+                 frame_number += 1;
+                 break;
+                case 3:
+                 render_frame(frame_number);
+                 frame_number = 0;
+                 break;
+             }
+            frame_timer = timer_read();
+        }
+    }
+}
+
+/*
+void matrix_scan_user(void){
+    if(timer_elapsed(frame_timer)>200){
+         if(frame_number){
+             render_logo();
+         }else{
+             render_logo2();
+         }
+         frame_timer = timer_read();
+         frame_number = !frame_number;
+    }
+}
+*/
+
+/* Geht
 #ifdef SSD1306OLED
-
-// When add source files to SRC in rules.mk, you can use functions.
-const char *read_layer_state(void);
-const char *read_logo(void);
-void set_keylog(uint16_t keycode, keyrecord_t *record);
-const char *read_keylog(void);
-const char *read_keylogs(void);
-
-// const char *read_mode_icon(bool swap);
-// const char *read_host_led_state(void);
-// void set_timelog(void);
-// const char *read_timelog(void);
-
-void matrix_scan_user(void) {
-   iota_gfx_task();
-}
-
-void matrix_render_user(struct CharacterMatrix *matrix) {
-  if (is_master) {
-    // If you want to change the display of OLED, you need to change here
-    matrix_write_ln(matrix, read_layer_state());
-    matrix_write_ln(matrix, read_keylog());
-    //matrix_write_ln(matrix, read_keylogs());
-    //matrix_write_ln(matrix, read_mode_icon(keymap_config.swap_lalt_lgui));
-    //matrix_write_ln(matrix, read_host_led_state());
-    //matrix_write_ln(matrix, read_timelog());
-  } else {
-    matrix_write(matrix, read_logo());
+void render_status_master(void){
+  oled_write_P(PSTR("Map: "), false);
+  switch (biton32(default_layer_state)) {
+    case _QWERTY:
+      oled_write_P(PSTR("Qwer|"), false);
+      break;
+    case _COLEMAK:
+      oled_write_P(PSTR("Col |"), false);
+      break;
   }
-}
-
-void matrix_update(struct CharacterMatrix *dest, const struct CharacterMatrix *source) {
-  if (memcmp(dest->display, source->display, sizeof(dest->display))) {
-    memcpy(dest->display, source->display, sizeof(dest->display));
-    dest->dirty = true;
+  oled_write_P(PSTR(" Lyr: "), false);
+  switch (biton32(layer_state)) {
+    case _NUM:
+      oled_write_P(PSTR("Numb\n"), false);
+      break;
+    case _MOV:
+      oled_write_P(PSTR("Mov\n"), false);
+      break;
+    case _SYM:
+      oled_write_P(PSTR("Sym\n"), false);
+      break;
+    case _ADJUST:
+      oled_write_P(PSTR("Adj\n"), false);
+      break;
+    default:
+      // Or use the write_ln shortcut over adding '\n' to the end of your string
+      oled_write_ln_P(PSTR("Std"), false);
   }
+
+  uint8_t modifiers = get_mods() | get_oneshot_mods(); // Variable fuer die Modifier
+                                                       // MOD_MASK_SHIFT // MOD_MASK_CTRL // MOD_MASK_ALT // MOD_MASK_GUI
+  uint8_t led_usb_state = host_keyboard_leds(); // Variable fuer die USB_LED indicator
+                                                // USB_LED_NUM_LOCK // USB_LED_CAPS_LOCK // USB_LED_SCROLL_LOCK
+  oled_write_P(PSTR("SFT"), (modifiers & MOD_MASK_SHIFT));
+  oled_write_P(PSTR("CAPS"), (led_usb_state & (1 << USB_LED_CAPS_LOCK)));
+  oled_write(keylog_str, false); // geht noch nicht
+
+  oled_write_P(led_usb_state & (1<<USB_LED_NUM_LOCK) ? PSTR("NUMLCK ") : PSTR("       "), false);
+  oled_write_P(led_usb_state & (1<<USB_LED_CAPS_LOCK) ? PSTR("CAPLCK ") : PSTR("       "), false);
+  oled_write_P(led_usb_state & (1<<USB_LED_SCROLL_LOCK) ? PSTR("SCRLCK ") : PSTR("       "), false);
+
+  oled_write_ln_P(read_logo(),false);
 }
 
-void iota_gfx_task_user(void) {
-  struct CharacterMatrix matrix;
-  matrix_clear(&matrix);
-  matrix_render_user(&matrix);
-  matrix_update(&display, &matrix);
+void render_status_secondary(void){
 }
-#endif//SSD1306OLED
+
+void oled_task_user(void) {
+    if (is_master){
+        render_status_master();
+    } else {
+        render_status_secondary();
+    }
+}
+    // Host Keyboard Layer Status
+    //
+    //
+#endif
+*/

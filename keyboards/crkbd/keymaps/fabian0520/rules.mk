@@ -1,15 +1,16 @@
 
 # If you want to change the display of OLED, you need to change here
-SRC +=  glcdfont.c \
-		./lib/rgb_state_reader.c \
-        ./lib/layer_state_reader.c \
-        ./lib/logo_reader.c \
-		./lib/keylogger.c \
-        # ./lib/mode_icon_reader.c \
-        # ./lib/host_led_state_reader.c \
-		# ./lib/timelogger.c \
+SRC +=  ./keymaps/fabian0520/lib/keylogger.c \
+		./keymaps/fabian0520//lib/rgb_state_reader.c \
+        ./keymaps/fabian0520//lib/layer_state_reader.c \
+        ./keymaps/fabian0520/lib/logo_reader.c \
+        ./keymaps/fabian0520//lib/mode_icon_reader.c \
+        ./keymaps/fabian0520//lib/host_led_state_reader.c \
+		./keymaps/fabian0520/lib/timelogger.c \
+		#.keymaps/fabian0520/lib/glcdfont.c \
 
-TAP_DANCE_ENABLE 		   = yes
+
+TAP_DANCE_ENABLE 		   = no
 BOOTMAGIC_ENABLE           = no  # Virtual DIP switch configuration(+1000)
 MOUSEKEY_ENABLE            = no  # Mouse keys(+4700)
 EXTRAKEY_ENABLE            = yes # Audio control and System control(+450)
@@ -30,4 +31,4 @@ SLEEP_LED_ENABLE = no    # Breathing sleep LED during USB suspend
 
 BOOTLOADER = qmk-dfu
 
-#OLED_DRIVER_ENABLE = yes  #Konflikt mit glcdfont.c
+OLED_DRIVER_ENABLE = yes  #Konflikt mit glcdfont.c
