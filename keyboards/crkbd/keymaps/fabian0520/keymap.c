@@ -7,8 +7,6 @@
 #include QMK_KEYBOARD_H
 
 extern keymap_config_t keymap_config;
-static uint16_t frame_timer;
-static uint8_t frame_number;
 //static bool frame_number=false;
 
 #ifdef RGBLIGHT_ENABLE
@@ -66,13 +64,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
 #ifdef OLED_DRIVER_ENABLE
+uint16_t        oled_timer;
+uint16_t        animation_timer;
+static uint16_t frame_timer;
+static uint8_t frame_number;
+
+//  ist noch im user folder eingebaut. TODO: process_record_keymap zum laufen bringen.
+/*
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if (record->event.pressed) {
+        oled_timer = timer_read();
+    }
+    return true;
+}
+*/
 
 void render_frame(uint8_t frame) {
-  static const char PROGMEM animation[3][3][6] = {
+  static const char PROGMEM animation[6][3][6] = {
       /*
-          {0x80,0x81,0x82,0x83,0x84,0x85,0}//x86,0x87,0x88,0x89,0x8a,0x8b,0x8c,0x8d,0x8e,0x8f,0x90,0x91,0x92,0x93,0x94,0}
-          {0xa0,0xa1,0xa2,0xa3,0xa4,0xa5,0}//xa6,0xa7,0xa8,0xa9,0xaa,0xab,0xac,0xad,0xae,0xaf,0xb0,0xb1,0xb2,0xb3,0xb4,0}
-          {0xc0,0xc1,0xc2,0xc3,0xc4,0xc5,0}//xc6,0xc7,0xc8,0xc9,0xca,0xcb,0xcc,0xcd,0xce,0xcf,0xd0,0xd1,0xd2,0xd3,0xd4,0}
+          {0x80,0x81,0x82,0x83,0x84,0x85,0x86,0x87,0x88,0x89,0x8a,0x8b,0x8c,0x8d,0x8e,0x8f,0x90,0x91,0x92,0x93,0x94,0}
+          {0xa0,0xa1,0xa2,0xa3,0xa4,0xa5,0xa6,0xa7,0xa8,0xa9,0xaa,0xab,0xac,0xad,0xae,0xaf,0xb0,0xb1,0xb2,0xb3,0xb4,0}
+          {0xc0,0xc1,0xc2,0xc3,0xc4,0xc5,0xc6,0xc7,0xc8,0xc9,0xca,0xcb,0xcc,0xcd,0xce,0xcf,0xd0,0xd1,0xd2,0xd3,0xd4,0}
   */
 
       {
@@ -89,22 +101,27 @@ void render_frame(uint8_t frame) {
           {0x88,0x89,0x8a,0x8b,0},
           {0xa8,0xa9,0xaa,0xab,0},
           {0xc8,0xc9,0xca,0xcb,0}
+      },
+      {
+          {0x8c,0x8d,0x8e,0x8f,0},
+          {0xac,0xad,0xae,0xaf,0},
+          {0xcc,0xcd,0xce,0xcf,0}
+      },
+      {
+          {0x90,0x91,0x92,0x93,0},
+          {0xb0,0xb1,0xb2,0xb3,0},
+          {0xd0,0xd1,0xd2,0xd3,0}
+      },
+      {
+          {0x94,0x95,0x96,0x97,0},
+          {0xb4,0xb5,0xb6,0xb7,0},
+          {0xd4,0xd5,0xd6,0xd7,0}
       }
   };
   oled_write_ln_P(animation[frame][0], false);
   oled_write_ln_P(animation[frame][1], false);
   oled_write_ln_P(animation[frame][2], false);
 }
-
-/*
-void oled_task_user(void) {
-  // Host Keyboard Layer Status
-  if(timer_elapsed(frame_timer)>100){
-    render_logo();
-  }
-}
-*/
-#endif
 
 void keyboard_post_init_user(void) {
     frame_timer = timer_read();
@@ -116,54 +133,65 @@ void render_primary(void){
 }
 
 void oled_task_user(void){
+    if (timer_elapsed(oled_timer) > 60000) {
+        oled_off();
+        return;
+    }
     if(is_master){
         //  Funktion, was auf das erste Desplay geschrieben werden soll
-        if(timer_elapsed(frame_timer)>150){
-            switch(frame_number){
-                case 0:
-                 render_frame(frame_number);
-                 frame_number = 1;
-                 break;
-                case 1:
-                 render_frame(frame_number);
-                 frame_number = 2;
-                 break;
-                case 2:
-                 render_frame(frame_number);
-                 frame_number = 3;
-                 break;
-                case 3:
-                 render_frame(frame_number-2);
-                 frame_number = 0;
-                 break;
-             }
-            frame_timer = timer_read();
-        }
     }else{
-        if(timer_elapsed(frame_timer)>200){
-            switch(frame_number){
-                case 0:
-                 render_frame(frame_number);
-                 frame_number += 1;
-                 break;
-                case 1:
-                 render_frame(frame_number);
-                 frame_number += 1;
-                 break;
-                case 2:
-                 render_frame(frame_number);
-                 frame_number += 1;
-                 break;
-                case 3:
-                 render_frame(frame_number);
-                 frame_number = 0;
-                 break;
-             }
+        //  Secondary side
+        if(timer_elapsed(animation_timer) > 2000) {
+            // after 1000ms play standing animation
+            if(timer_elapsed(frame_timer)>400){
+                switch(frame_number){
+                    case 0:
+                     render_frame(3);
+                     frame_number += 1;
+                     break;
+                    case 1:
+                     render_frame(4);
+                     frame_number += 1;
+                     break;
+                    case 2:
+                     render_frame(5);
+                     frame_number = 0;
+                     break;
+                    case 3:
+                     render_frame(4);
+                     frame_number = 0;
+                     break;
+                 }
             frame_timer = timer_read();
+            }
+        }else{
+            // else play running animation
+            if(timer_elapsed(frame_timer)>200){
+                switch(frame_number){
+                    case 0:
+                     render_frame(frame_number);
+                     frame_number += 1;
+                     break;
+                    case 1:
+                     render_frame(frame_number);
+                     frame_number += 1;
+                     break;
+                    case 2:
+                     render_frame(frame_number);
+                     frame_number += 1;
+                     break;
+                    case 3:
+                     render_frame(frame_number-2);
+                     frame_number = 0;
+                     break;
+                }
+            frame_timer = timer_read();
+            }
         }
     }
 }
 
+#endif
 /*
 void matrix_scan_user(void){
     if(timer_elapsed(frame_timer)>200){

@@ -24,6 +24,11 @@ float music_scale[][2]     = SONG(MUSIC_SCALE_SOUND);
 
 #endif /* AUDIO_ENABLE */
 
+#ifdef OLED_DRIVER_ENABLE
+uint16_t        oled_timer;
+uint16_t        animation_timer;
+#endif
+
 // Alternativer Weg mit den Layern umzugehen
 /*
 uint32_t layer_state_set_user(uint32_t state) {
@@ -61,6 +66,12 @@ uint32_t layer_state_set_user(uint32_t state) {
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     #ifdef i3_NAVIGATION_ENABLE
         static uint8_t shift_esc_shift_mask;
+    #endif
+    #ifdef OLED_DRIVER_ENABLE
+        if (record->event.pressed) {
+            oled_timer = timer_read();
+            animation_timer = timer_read();
+        }
     #endif
 
 #ifdef SSD1306OLED
