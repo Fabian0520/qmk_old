@@ -61,23 +61,20 @@ uint32_t layer_state_set_user(uint32_t state) {
 	return state;
 }
 */
-
+__attribute__((weak))
+    bool process_record_keymap(uint16_t keycode, keyrecord_t *record){
+        return true;
+    }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     #ifdef i3_NAVIGATION_ENABLE
         static uint8_t shift_esc_shift_mask;
     #endif
-    #ifdef OLED_DRIVER_ENABLE
-        if (record->event.pressed) {
-            oled_timer = timer_read();
-            animation_timer = timer_read();
-        }
-    #endif
 
-#ifdef SSD1306OLED
+    #ifdef SSD1306OLED
     //set_keylog(keycode, record);
     void set_keylog(uint16_t keycode, keyrecord_t *record);
-#endif
+    #endif
     // set_timelog();
     
   switch (keycode) {
@@ -378,6 +375,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         #endif
     }
     return true;
+  return process_record_keymap(keycode, record);
 }
 
 // siehe keyboards/planck/keymaps/zrichard/keymap.c 

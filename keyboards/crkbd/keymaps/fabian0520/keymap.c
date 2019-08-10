@@ -69,15 +69,13 @@ uint16_t        animation_timer;
 static uint16_t frame_timer;
 static uint8_t frame_number;
 
-//  ist noch im user folder eingebaut. TODO: process_record_keymap zum laufen bringen.
-/*
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
     if (record->event.pressed) {
         oled_timer = timer_read();
+        animation_timer = timer_read();
     }
     return true;
 }
-*/
 
 void render_frame(uint8_t frame) {
   static const char PROGMEM animation[6][3][6] = {
