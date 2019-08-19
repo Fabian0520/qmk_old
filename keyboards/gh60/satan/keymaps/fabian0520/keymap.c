@@ -20,16 +20,16 @@
 #define SCRE_DN LGUI(LSFT(LCTL(KC_A)))
 
 enum satan_layers {
-    _QWERTY,
-    _COLEMAK,
+    _QWER,
+    _COL,
     _FUNC1,
     _FUNC2, //Gleicher Layer wie FUNC1. Brauche ich nur um mit beiden Tasten in den ADJUST-Layer zu kommen.
     _ADJUST,
 };
 
 enum satan_keycodes {
-    QWERTY = SAFE_RANGE,
-    COLEMAK,
+    QWER = SAFE_RANGE,
+    COL,
     TEST,
     FUNC1,
     FUNC2
@@ -45,7 +45,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 };
 */
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  /* Keymap _QWERTY: (QWERTY Layer) Default Layer
+  /* Keymap _QWER: (QWER Layer) Default Layer
    * ,-----------------------------------------------------------.
    * |Esc~| 1|  2|  3|  4|  5|  6|  7|  8|  9|  0|  -|  =|Backsp |
        * |-----------------------------------------------------------|
@@ -58,7 +58,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        * |Ctrl|Gui |Alt |      Space            |Alt |Gui |FN  |Ctrl |
        * `-----------------------------------------------------------'
        */
-    [_QWERTY] = LAYOUT_60_ansi(
+    [_QWER] = LAYOUT_60_ansi(
       F(0),    KC_1,   KC_2,   KC_3,   KC_4,   KC_5,   KC_6,   KC_7,   KC_8,   KC_9,   KC_0,   KC_MINS, KC_EQL, KC_BSPC, \
       KC_TAB , KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,   KC_Y,   KC_U,   KC_I,   KC_O,   KC_P,   KC_LBRC, KC_RBRC,KC_BSLS, \
       FUNC2  , KC_A,   KC_S,   KC_D,   KC_F,   KC_G,   KC_H,   KC_J,   KC_K,   KC_L,   KC_SCLN,KC_QUOT,         KC_ENT,  \
@@ -77,7 +77,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        * |    |    |    |                        |    |    |    |    |
        * `-----------------------------------------------------------'
        */
-    [_COLEMAK] = LAYOUT_60_ansi(
+    [_COL] = LAYOUT_60_ansi(
        F(0) , KC_1  , KC_2  , KC_3  , KC_4  , KC_5  , KC_6  , KC_7  , KC_8  , KC_9  , KC_0  , KC_MINS, KC_EQL, KC_BSPC , \
       KC_TAB, KC_Q  , KC_W  , KC_F  , KC_P  , KC_G  , KC_J  , KC_L  , KC_U  , KC_Y  ,KC_SCLN, KC_LBRC,KC_RBRC ,KC_BSLS , \
       FUNC2 , KC_A  , KC_R  , KC_S  , KC_T  , KC_D  , KC_H  , KC_N  , KC_E  , KC_I  , KC_O  , KC_QUOT,          KC_ENT , \
@@ -100,7 +100,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_FUNC2] = LAYOUT_60_ansi(
       RESET  , KC_F1 , KC_F2 , KC_F3 , KC_F4 , KC_F5 , KC_F6 , KC_F7 , KC_F8 , KC_F9 ,KC_F10 ,KC_F11 ,KC_F12 ,KC_DEL , \
       _______,KC_PGUP, KC_UP ,KC_PGDN,KC_HOME,_______,_______, KC_7  , KC_8  , KC_9  ,KC_PMNS,_______,_______,KC_INS , \
-      _______,KC_LEFT,KC_DOWN,KC_RGHT,KC_END ,_______,_______, KC_4  , KC_5  , KC_6  ,KC_PPLS,_______,        _______, \
+      _______,KC_LEFT,KC_DOWN,KC_RGHT,KC_END ,_______,_______, KC_4  , KC_5  , KC_6  ,KC_PPLS,_______,  _______      , \
       _______,KC_WBAK,KC_WFWD,_______,_______,_______, KC_0  , KC_1  , KC_2  , KC_3  ,_______,_______, \
 
           _______,_______,_______,                 _______,                       _______,_______,_______, _______),
@@ -139,7 +139,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        */
     [_ADJUST] = LAYOUT_60_ansi(
       KC_NO , KC_NO , KC_NO , KC_NO , KC_NO , KC_NO , KC_NO , KC_NO , KC_NO , KC_NO ,KC_MUTE,KC_VOLD,KC_VOLU, KC_NO , \
-      KC_NO , QWERTY,COLEMAK, KC_NO , KC_NO , KC_NO , KC_NO , KC_NO , KC_NO , KC_NO , KC_NO ,SCRE_DN,SCRE_UP, KC_NO , \
+      KC_NO , QWER,COL, KC_NO , KC_NO , KC_NO , KC_NO , KC_NO , KC_NO , KC_NO , KC_NO ,SCRE_DN,SCRE_UP, KC_NO , \
       FUNC2 , KC_NO , KC_NO , KC_NO , KC_NO , KC_NO , KC_NO , KC_NO , KC_NO , KC_NO , KC_NO ,BL_STEP,         KC_NO , \
       KC_NO , KC_NO , KC_NO , KC_NO , KC_NO , KC_NO , KC_NO ,BL_BRTG,BL_DEC ,BL_INC ,BL_TOGG, KC_NO , \
       KC_NO , KC_NO , KC_NO ,                         KC_NO ,                 KC_NO , KC_NO , FUNC1 , KC_NO ),
@@ -185,20 +185,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
       switch (keycode) {
-        case QWERTY:
+        case QWER:
           if (record->event.pressed) {
-            set_single_persistent_default_layer(_QWERTY);
-            //default_layer_set(1UL<<_QWERTY);
-            //persistent_default_layer_set(1UL<<_QWERTY);
-            //layer_on(_QWERTY);
+            set_single_persistent_default_layer(_QWER);
+            //default_layer_set(1UL<<_QWER);
+            //persistent_default_layer_set(1UL<<_QWER);
+            //layer_on(_QWER);
           }
           return false;
           break;
-        case COLEMAK:
+        case COL:
           if (record->event.pressed) {
-            set_single_persistent_default_layer(_COLEMAK);
+            set_single_persistent_default_layer(_COL);
             //default_layer_set(1UL<<_TEST);
-            //persistent_default_layer_set(1UL<<_QWERTY);
+            //persistent_default_layer_set(1UL<<_QWER);
             //layer_on(_TEST);
           }
           return false;
