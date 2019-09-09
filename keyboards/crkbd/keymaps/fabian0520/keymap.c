@@ -126,8 +126,47 @@ void keyboard_post_init_user(void) {
     frame_number = 0;
 }
 
-void render_primary(void){
-    oled_write("Test String4", false);
+void render_status_master(void){
+  oled_write_P(PSTR("Map: "), false);
+  switch (biton32(default_layer_state)) {
+    case _QWERTY:
+      oled_write_P(PSTR("Qwer|"), false);
+      break;
+    case _COLEMAK:
+      oled_write_P(PSTR("Col |"), false);
+      break;
+  }
+  oled_write_P(PSTR(" Lyr: "), false);
+  switch (biton32(layer_state)) {
+    case _NUM:
+      oled_write_P(PSTR("Numb\n"), false);
+      break;
+    case _MOV:
+      oled_write_P(PSTR("Mov\n"), false);
+      break;
+    case _SYM:
+      oled_write_P(PSTR("Sym\n"), false);
+      break;
+    case _ADJUST:
+      oled_write_P(PSTR("Adj\n"), false);
+      break;
+    default:
+      // Or use the write_ln shortcut over adding '\n' to the end of your string
+      oled_write_ln_P(PSTR("Std"), false);
+  }
+
+  uint8_t modifiers = get_mods() | get_oneshot_mods(); // Variable fuer die Modifier
+                                                       // MOD_MASK_SHIFT // MOD_MASK_CTRL // MOD_MASK_ALT // MOD_MASK_GUI
+  uint8_t led_usb_state = host_keyboard_leds(); // Variable fuer die USB_LED indicator
+                                                // USB_LED_NUM_LOCK // USB_LED_CAPS_LOCK // USB_LED_SCROLL_LOCK
+  oled_write_P(PSTR("SFT"), (modifiers & MOD_MASK_SHIFT));
+  oled_write_P(PSTR(" | "), false);
+  oled_write_P(PSTR("CAPS"), (led_usb_state & (1 << USB_LED_CAPS_LOCK)));
+  //oled_write(keylog_str, false); // geht noch nicht
+
+  oled_write_P(led_usb_state & (1<<USB_LED_NUM_LOCK) ? PSTR("NUMLCK ") : PSTR("       "), false);
+  oled_write_P(led_usb_state & (1<<USB_LED_CAPS_LOCK) ? PSTR("CAPLCK ") : PSTR("       "), false);
+  oled_write_P(led_usb_state & (1<<USB_LED_SCROLL_LOCK) ? PSTR("SCRLCK ") : PSTR("       "), false);
 }
 
 void oled_task_user(void){
@@ -136,6 +175,7 @@ void oled_task_user(void){
         return;
     }
     if(is_master){
+        render_status_master();
         //  Funktion, was auf das erste Desplay geschrieben werden soll
     }else{
         //  Secondary side
@@ -188,80 +228,4 @@ void oled_task_user(void){
         }
     }
 }
-
 #endif
-/*
-void matrix_scan_user(void){
-    if(timer_elapsed(frame_timer)>200){
-         if(frame_number){
-             render_logo();
-         }else{
-             render_logo2();
-         }
-         frame_timer = timer_read();
-         frame_number = !frame_number;
-    }
-}
-*/
-
-/* Geht
-#ifdef SSD1306OLED
-void render_status_master(void){
-  oled_write_P(PSTR("Map: "), false);
-  switch (biton32(default_layer_state)) {
-    case _QWERTY:
-      oled_write_P(PSTR("Qwer|"), false);
-      break;
-    case _COLEMAK:
-      oled_write_P(PSTR("Col |"), false);
-      break;
-  }
-  oled_write_P(PSTR(" Lyr: "), false);
-  switch (biton32(layer_state)) {
-    case _NUM:
-      oled_write_P(PSTR("Numb\n"), false);
-      break;
-    case _MOV:
-      oled_write_P(PSTR("Mov\n"), false);
-      break;
-    case _SYM:
-      oled_write_P(PSTR("Sym\n"), false);
-      break;
-    case _ADJUST:
-      oled_write_P(PSTR("Adj\n"), false);
-      break;
-    default:
-      // Or use the write_ln shortcut over adding '\n' to the end of your string
-      oled_write_ln_P(PSTR("Std"), false);
-  }
-
-  uint8_t modifiers = get_mods() | get_oneshot_mods(); // Variable fuer die Modifier
-                                                       // MOD_MASK_SHIFT // MOD_MASK_CTRL // MOD_MASK_ALT // MOD_MASK_GUI
-  uint8_t led_usb_state = host_keyboard_leds(); // Variable fuer die USB_LED indicator
-                                                // USB_LED_NUM_LOCK // USB_LED_CAPS_LOCK // USB_LED_SCROLL_LOCK
-  oled_write_P(PSTR("SFT"), (modifiers & MOD_MASK_SHIFT));
-  oled_write_P(PSTR("CAPS"), (led_usb_state & (1 << USB_LED_CAPS_LOCK)));
-  oled_write(keylog_str, false); // geht noch nicht
-
-  oled_write_P(led_usb_state & (1<<USB_LED_NUM_LOCK) ? PSTR("NUMLCK ") : PSTR("       "), false);
-  oled_write_P(led_usb_state & (1<<USB_LED_CAPS_LOCK) ? PSTR("CAPLCK ") : PSTR("       "), false);
-  oled_write_P(led_usb_state & (1<<USB_LED_SCROLL_LOCK) ? PSTR("SCRLCK ") : PSTR("       "), false);
-
-  oled_write_ln_P(read_logo(),false);
-}
-
-void render_status_secondary(void){
-}
-
-void oled_task_user(void) {
-    if (is_master){
-        render_status_master();
-    } else {
-        render_status_secondary();
-    }
-}
-    // Host Keyboard Layer Status
-    //
-    //
-#endif
-*/
