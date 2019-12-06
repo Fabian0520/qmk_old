@@ -16,105 +16,109 @@
 
 #include QMK_KEYBOARD_H
 #include "rgb_color_sets.h"
+//#include "fabian0520.h"
+
+#define MOD_0       LT(_MOD,KC_0)
+#define MOD_1       LT(_MOD,KC_A)
+#define SYM_COMM    LT(_SYM,KC_COMM)
+//#define BASE        TO(_BASE)
+//#define MOV         TO(_MOV)
 
 enum layers {
   _BASE,
+  _MOD,
+  _SYM,
   _MOV,
   _RGB,
-  _LAYER,
+  _LAYSEL,
 };
 
 enum custom_keycodes {
   BASE = SAFE_RANGE,
-  MOV,
+  RGB_LYR,
   RGB_SET,
-  LAYER,
 };
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 	[_BASE] = LAYOUT(
-		KC_7    , KC_8    , KC_9    , \
-		KC_4    , KC_5    , KC_6    , \
-		KC_1    , KC_2    , KC_3    , \
-		LT(_LAYER,KC_0)   , KC_DOT    , KC_COMM    \
+		KC_7      , KC_8     , KC_9     , \
+		KC_4      , KC_5     , KC_6     , \
+		KC_1      , KC_2     , KC_3     , \
+        MOD_0     , KC_DOT   , SYM_COMM  \
 	),
  
 	[_MOV] = LAYOUT(
-		KC_PGUP , KC_UP   , KC_HOME , \
-		KC_LEFT , KC_DOWN , KC_RGHT , \
-		KC_PGDN , KC_NO   , KC_END  , \
-		KC_TRNS , KC_TRNS , KC_ENT    \
+		KC_PGUP   , KC_UP    , KC_HOME , \
+		KC_LEFT   , KC_DOWN  , KC_RGHT , \
+		KC_PGDN   , KC_NO    , KC_END  , \
+		MOD_1     , KC_ENT   , KC_TRNS \
 	),
+ // Kann man sich momentan noch sparen Weg finden, wie man VA speichern kann
+	[_RGB] = LAYOUT(                        
+		RGB_HUI   , RGB_SAI  , RGB_VAI , \
+		RGB_HUD   , RGB_SAD  , RGB_VAD , \
+		KC_TRNS   , RGB_TOG  , KC_TRNS , \
+		KC_TRNS   , RGB_LYR  , KC_TRNS \
+	),
+
+    [_MOD] = LAYOUT(
+        KC_ESC    , KC_NO    , KC_BSPC , \
+        KC_TAB    , KC_NO    , KC_DEL  , \
+        KC_NO     , KC_NO    , KC_ENT  , \
+        KC_TRNS   , KC_NO    , KC_TRNS \
+    ),
+
+    [_SYM] = LAYOUT(
+        S(KC_7)   , KC_GRAVE, S(KC_SLSH), \
+        S(KC_4)   , S(KC_5) , S(KC_6) , \
+        S(KC_1)   , S(KC_2) , S(KC_3) , \
+        KC_TRNS   , KC_QUOT , KC_TRNS  \
+    ),
  
-	[_RGB] = LAYOUT(
-		KC_TRNS , KC_TRNS , KC_TRNS , \
-		KC_TRNS , KC_TRNS , KC_TRNS , \
-		KC_TRNS , KC_TRNS , KC_TRNS  , \
-		KC_TRNS , RGB_TOG , KC_TRNS    \
-	),
-  
-	[_LAYER] = LAYOUT(
-		KC_NO   , KC_NO   , KC_NO   , \
-		KC_NO   , KC_NO   , KC_NO   , \
-		BASE    , MOV     , KC_NO   , \
-		KC_TRNS , RGB_SET , KC_NO      \
+	[_LAYSEL] = LAYOUT(
+	   	KC_NO     , KC_NO   , KC_NO   , \
+		KC_NO     , KC_NO   , KC_NO   , \
+		TO(_BASE) , TO(_MOV), KC_NO   , 
+		KC_TRNS   , TO(_RGB), KC_TRNS \
 	)
- };
+};
 
 void keyboard_post_init_user(void) {
-  // Call the post init code.
-  #ifdef UNDERGLOW_ENABLE
-      set_single_persistent_default_layer(_BASE);
-      rgblight_enable(); // enables Rgb, without saving settings
-      rgblight_mode(RGBLIGHT_MODE_STATIC_LIGHT);
-      rgblight_sethsv(HSV_TEAL);
-  #endif
-  //rgblight_mode_noeeprom(RGBLIGHT_MODE_BREATHING+4);
-} 
+    set_single_persistent_default_layer(_BASE);
+}
 
-bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) {
-// ------------------- Layer Code --------------------------------
-    case BASE:
-      if (record->event.pressed) {
-        set_single_persistent_default_layer(_BASE);
-        #ifdef UNDERGLOW_ENABLE
-             rgblight_sethsv(HSV_TEAL);
-        #endif
-      }
-      return false;
-      break;
-    case RGB_SET:
-      if (record->event.pressed) {
-        set_single_persistent_default_layer(_RGB);
-        #ifdef UNDERGLOW_ENABLE
-            test(); //aus rgb_color_sets.h
-        #endif
-        //rgblight_sethsv(255,255*0.75,255*0.89);
-      }
-      return false;
-      break;
-    case MOV:
-      if (record->event.pressed) {
-        set_single_persistent_default_layer(_MOV);
-        #ifdef UNDERGLOW_ENABLE
-            rgblight_sethsv(HSV_GOLD);
-        #endif
-      }
-      return false;
-      break;
-    case LAYER:
-      if (record->event.pressed) {
-        layer_on(_LAYER);
-        //update_tri_layer(_MOV, _NUM, _ADJUST);
-      } else {
-        layer_off(_LAYER);
-        //update_tri_layer(_MOV, _NUM, _ADJUST);
-      }
-      return false;
-      break;
-  }
-  return true;
+layer_state_t layer_state_set_user(layer_state_t state) {
+    state =  update_tri_layer_state(state, _SYM, _MOD, _LAYSEL);    // manages trilayer stuff
+    #ifdef UNDERGLOW_ENABLE
+    switch (get_highest_layer(state)) {
+    case _BASE:
+        //if (user_config.rgb_layer_change) {
+            rgblight_sethsv(HSV_TEAL);// rgblight_mode_noeeprom(1); 
+        //}
+        break;
+    case _MOV:
+        rgblight_sethsv(HSV_GOLD);
+        break;
+    case _RGB:
+        test(); //aus rgb_color_sets.h
+        break;
+    case _SYM:
+        //test(); //aus rgb_color_sets.h
+        rgblight_sethsv(HSV_RED);
+        break;
+    case _MOD:
+        test(); //aus rgb_color_sets.h
+        break;
+    case _LAYSEL:
+        test(); //aus rgb_color_sets.h
+        rgblight_sethsv(HSV_GREEN);
+        break;
+    default: //  for any other layers, or the default layer
+        rgblight_setrgb (0x50,  0x9F, 0xFF);
+        break;
+    }
+    #endif
+  return state;
 }

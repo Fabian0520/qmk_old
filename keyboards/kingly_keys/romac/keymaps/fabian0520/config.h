@@ -4,3 +4,4 @@
 #define RGB_DI_PIN F4
 
 #define UNDERGLOW_ENABLE
+#define CUSTOM_SHIFT_ENABLE
