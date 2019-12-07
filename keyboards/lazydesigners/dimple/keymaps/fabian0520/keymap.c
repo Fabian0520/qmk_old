@@ -13,6 +13,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+//#include <print.h>
 #include "fabian0520.h"
 #include "unicode_fabi.h"
 extern keymap_config_t keymap_config;
@@ -151,6 +152,20 @@ KC_TRNS ,  KC_NO   ,  KC_NO   ,  KC_NO   ,  KC_NO   ,  KC_NO   ,  KC_NO   ,  i3_
                KC_NO   ,   KC_NO   ,   KC_NO   ,   KC_NO   ,   KC_NO   ,   KC_NO   ,   KC_NO   ,   KC_NO   \
    ),
    */
+
+/* Debug stuff
+bool process_record_keymap(uint16_t keycode, keyrecord_t *record){
+  switch (keycode) {
+    case RGB_HUD:
+        uprintf("Mode:  %u, HUE: %u, SAT: %u, VAL: %u\n",rgblight_get_mode(),rgblight_get_hue(),rgblight_get_sat(), rgblight_get_val());
+    break;
+    case RGB_MOD:
+        uprintf("Mode:  %u, HUE: %u, SAT: %u, VAL: %u\n",rgblight_get_mode(),rgblight_get_hue(),rgblight_get_sat(), rgblight_get_val());
+    break;
+  }
+  return true;
+}
+*/
 
 void led_set_user(uint8_t usb_led) {
 if (IS_LED_ON(usb_led, USB_LED_CAPS_LOCK)) {

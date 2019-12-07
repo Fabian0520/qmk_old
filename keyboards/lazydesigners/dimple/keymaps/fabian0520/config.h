@@ -42,10 +42,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 // #define RGBLIGHT_ANIMATIONS
 // #define RGBLED_NUM 12
-// #define RGBLIGHT_HUE_STEP 17
-// #define RGBLIGHT_SAT_STEP 17
-// #define RGBLIGHT_VAL_STEP 17
-// #define RGBLIGHT_LIMIT_VAL 255
+//#define RGBLIGHT_HUE_STEP 17
+//#define RGBLIGHT_SAT_STEP 17
+//#define RGBLIGHT_VAL_STEP 17
+//#define RGBLIGHT_LIMIT_VAL 255
 #define i3_NAVIGATION_ENABLE
 #define CUSTOM_SHIFT_ENABLE
 #define ESC_CAPS_ENABLE
