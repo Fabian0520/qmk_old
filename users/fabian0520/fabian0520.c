@@ -29,43 +29,33 @@ uint16_t        oled_timer;
 uint16_t        animation_timer;
 #endif
 
-// Alternativer Weg mit den Layern umzugehen
-/*
-uint32_t layer_state_set_user(uint32_t state) {
+// Trilayer update and LED layer code
+
+layer_state_t layer_state_set_user(layer_state_t state) {
 	state = update_tri_layer_state(state, _NUM, _MOV, _ADJUST);
+    #ifdef RGBLIGHT_ENABLE 
 	switch (biton32(state)) {
         case _NUM:
-          #ifdef RGBLIGHT_ENABLE 
     	  	rgblight_sethsv_noeeprom(HSV_GREEN);
-          #endif
-          //return false;
           break;
         case _MOV:
-          #ifdef RGBLIGHT_ENABLE 
     	  	rgblight_sethsv_noeeprom(HSV_BLUE);
-          #endif
-          //return false;
           break;
         case _ADJUST:
-          #ifdef RGBLIGHT_ENABLE 
     	  	rgblight_sethsv_noeeprom(HSV_RED);
-          #endif
-          //return false;
           break;
         default:
     	  	rgblight_sethsv_noeeprom(HSV_GOLD);
             break;
-
-
+    #endif
     }
 	return state;
 }
-*/
+
 __attribute__((weak))
     bool process_record_keymap(uint16_t keycode, keyrecord_t *record){
         return true;
     }
-
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     #ifdef i3_NAVIGATION_ENABLE
@@ -121,71 +111,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
-    case NUM:
-      if (record->event.pressed) {
-        layer_on(_NUM);
-        update_tri_layer(_MOV, _NUM, _ADJUST);
-      } else {
-        layer_off(_NUM);
-        update_tri_layer(_MOV, _NUM, _ADJUST);
-      }
-      return false;
-      break;
-    case MOV:
-      if (record->event.pressed) {
-        layer_on(_MOV);
-        update_tri_layer(_MOV, _NUM, _ADJUST);
-      } else {
-        layer_off(_MOV);
-        update_tri_layer(_MOV, _NUM, _ADJUST);
-      }
-      return false;
-      break;
-    case NUM_SPC:
-      if (record->event.pressed) {
-        layer_on(_NUM);
-        update_tri_layer(_MOV, _NUM, _ADJUST);
-      } else {
-        layer_off(_NUM);
-        update_tri_layer(_MOV, _NUM, _ADJUST);
-      }
-      //return false;
-      break;
-    case MOV_ENT:
-      if (record->event.pressed) {
-        layer_on(_MOV);
-        update_tri_layer(_MOV, _NUM, _ADJUST);
-      } else {
-        layer_off(_MOV);
-        update_tri_layer(_MOV, _NUM, _ADJUST);
-      }
-      //return false;
-      break;
-     case TMP:
-      if (record->event.pressed) {
-        layer_on(_TMP);
-      } else {
-        layer_off(_TMP);
-      }
-      return false;
-      break;
-     case SYM:
-      if (record->event.pressed) {
-        layer_on(_SYM);
-      } else {
-        layer_off(_SYM);
-      }
-      return false;
-      break;
-     case ADJUST:
-      if (record->event.pressed) {
-        layer_on(_ADJUST);
-      } else {
-        layer_off(_ADJUST);
-      }
-      return false;
-      break;
-      
+     
     //------------------------------------------------------
     #ifdef i3_NAVIGATION_ENABLE
         case i3_S_1:
@@ -375,8 +301,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         #endif
     }
+    return process_record_keymap(keycode, record);
     return true;
-  return process_record_keymap(keycode, record);
 }
 
 // siehe keyboards/planck/keymaps/zrichard/keymap.c 

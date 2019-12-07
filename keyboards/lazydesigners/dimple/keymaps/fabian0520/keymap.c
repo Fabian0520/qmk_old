@@ -159,26 +159,3 @@ if (IS_LED_ON(usb_led, USB_LED_CAPS_LOCK)) {
 	dimple_led_on();
 	}
 }
-/*
-uint32_t layer_state_set_user(uint32_t state) {
-	state = update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
-	switch (biton32(state)) {
-		case _NUM:
-			rgblight_sethsv_noeeprom(HSV_GREEN);
-			break;
-		case _MOV:
-			rgblight_sethsv_noeeprom(HSV_GOLD);
-			break;
-		case _SYM:
-			rgblight_sethsv_noeeprom(HSV_BLUE);
-			break;
-		case _ADJUST:
-			rgblight_sethsv_noeeprom(HSV_RED);
-			break;
-		default:
-			rgblight_sethsv_noeeprom(HSV_WHITE);
-			break;
-	}
-	return state;
-}
-*/
