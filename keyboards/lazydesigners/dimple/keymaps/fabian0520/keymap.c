@@ -153,19 +153,24 @@ KC_TRNS ,  KC_NO   ,  KC_NO   ,  KC_NO   ,  KC_NO   ,  KC_NO   ,  KC_NO   ,  i3_
    ),
    */
 
-/* Debug stuff
-bool process_record_keymap(uint16_t keycode, keyrecord_t *record){
-  switch (keycode) {
-    case RGB_HUD:
-        uprintf("Mode:  %u, HUE: %u, SAT: %u, VAL: %u\n",rgblight_get_mode(),rgblight_get_hue(),rgblight_get_sat(), rgblight_get_val());
-    break;
-    case RGB_MOD:
-        uprintf("Mode:  %u, HUE: %u, SAT: %u, VAL: %u\n",rgblight_get_mode(),rgblight_get_hue(),rgblight_get_sat(), rgblight_get_val());
-    break;
-  }
-  return true;
+// LED color settings
+layer_state_t layer_state_set_keymap (layer_state_t state) {
+    switch(biton32(state)){
+        case _SYM:
+            break;
+    return state;
+        case _MOV:
+            break;
+    return state;
+        case _ADJUST:
+            break;
+        default:
+            rgblight_mode_noeeprom(30);
+            rgblight_sethsv_noeeprom(208, 255, 255);
+            break;
+    }
+    return state;
 }
-*/
 
 void led_set_user(uint8_t usb_led) {
 if (IS_LED_ON(usb_led, USB_LED_CAPS_LOCK)) {
@@ -174,3 +179,14 @@ if (IS_LED_ON(usb_led, USB_LED_CAPS_LOCK)) {
 	dimple_led_on();
 	}
 }
+
+/*
+bool process_record_keymap(uint16_t keycode, keyrecord_t *record){
+    switch(keycode){
+        case RGB_HUD:
+            uprintf("Mode: %u, H: %u \n",rgblight_get_mode(), rgblight_get_hue());
+            break;
+    }
+    return true;
+}
+*/

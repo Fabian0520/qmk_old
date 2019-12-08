@@ -31,34 +31,28 @@ uint16_t        animation_timer;
 #endif
 
 // Trilayer update and LED layer code
-
-layer_state_t layer_state_set_user(layer_state_t state) {
-	state = update_tri_layer_state(state, _NUM, _MOV, _ADJUST);
-    #ifdef RGBLIGHT_ENABLE 
-	switch (biton32(state)) {
-        /*
-        case _NUM:
-    	  	rgblight_sethsv_noeeprom(HSV_GREEN);
-            uprintf("Mode:  %u, HUE: %u, SAT: %u, VAL: %u\n",rgblight_get_mode(),rgblight_get_hue(),rgblight_get_sat(), rgblight_get_val());
-          break;
-        case _MOV:
-    	  	rgblight_sethsv_noeeprom(HSV_BLUE);
-          break;
-        case _ADJUST:
-            rgblight_mode(4);
-    	  	rgblight_sethsv_noeeprom(HSV_RED);
-            uprintf("Mode:  %u, HUE: %u, SAT: %u, VAL: %u\n",rgblight_get_mode(),rgblight_get_hue(),rgblight_get_sat(), rgblight_get_val());
-          break;
-        */
-        default:
-            rgblight_mode(30);
-    	  	rgblight_sethsv_noeeprom(216, 255, 255);
-            //uprintf("Mode:  %u, HUE: %u, SAT: %u, VAL: %u\n",rgblight_get_mode(),rgblight_get_hue(),rgblight_get_sat(), rgblight_get_val());
-            break;
-    #endif
-    }
-	return state;
+__attribute__ ((weak))
+layer_state_t layer_state_set_keymap (layer_state_t state) {
+  return state;
 }
+
+layer_state_t layer_state_set_user (layer_state_t state) {
+    state = update_tri_layer_state(state, _NUM, _MOV, _ADJUST);
+    //layer_state_set_rgb(state);
+    return layer_state_set_keymap (state);
+}
+
+/*
+void layer_state_set_rgb(layer_state_t state) {
+#if RBGLIGHT_ENABLE
+    switch(biton(state)) {
+        case _MOV:
+    	  	rgblight_sethsv_noeeprom(HSV_GREEN);
+            break;
+    }
+#endif
+}
+*/
 
 __attribute__((weak))
     bool process_record_keymap(uint16_t keycode, keyrecord_t *record){

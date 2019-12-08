@@ -7,7 +7,7 @@ MIDI_ENABLE = no            # MIDI support (+2400 to 4200, depending on config)
 AUDIO_ENABLE = no
 UNICODEMAP_ENABLE = yes
 MOUSEKEY_ENABLE = no
-CONSOLE_ENABLE = no
+CONSOLE_ENABLE = yes
 
 EXTRAFLAGS += -flto
 
