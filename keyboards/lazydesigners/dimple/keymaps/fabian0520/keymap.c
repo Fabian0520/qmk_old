@@ -13,6 +13,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+//#include <print.h>
 #include "fabian0520.h"
 #include "unicode_fabi.h"
 extern keymap_config_t keymap_config;
@@ -152,6 +153,25 @@ KC_TRNS ,  KC_NO   ,  KC_NO   ,  KC_NO   ,  KC_NO   ,  KC_NO   ,  KC_NO   ,  i3_
    ),
    */
 
+// LED color settings
+layer_state_t layer_state_set_keymap (layer_state_t state) {
+    switch(biton32(state)){
+        case _SYM:
+            break;
+    return state;
+        case _MOV:
+            break;
+    return state;
+        case _ADJUST:
+            break;
+        default:
+            rgblight_mode_noeeprom(30);
+            rgblight_sethsv_noeeprom(208, 255, 255);
+            break;
+    }
+    return state;
+}
+
 void led_set_user(uint8_t usb_led) {
 if (IS_LED_ON(usb_led, USB_LED_CAPS_LOCK)) {
 	dimple_led_off();
@@ -159,3 +179,14 @@ if (IS_LED_ON(usb_led, USB_LED_CAPS_LOCK)) {
 	dimple_led_on();
 	}
 }
+
+/*
+bool process_record_keymap(uint16_t keycode, keyrecord_t *record){
+    switch(keycode){
+        case RGB_HUD:
+            uprintf("Mode: %u, H: %u \n",rgblight_get_mode(), rgblight_get_hue());
+            break;
+    }
+    return true;
+}
+*/
