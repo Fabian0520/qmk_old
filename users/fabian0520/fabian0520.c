@@ -60,9 +60,9 @@ __attribute__((weak))
     }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    #ifdef i3_NAVIGATION_ENABLE
-        static uint8_t shift_esc_shift_mask;
-    #endif
+#ifdef i3_NAVIGATION_ENABLE
+    static uint8_t shift_esc_shift_mask;
+#endif
 
 #ifdef SSD1306OLED
     //set_keylog(keycode, record);
@@ -89,21 +89,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case COLEMAK:
       if (record->event.pressed) {
         set_single_persistent_default_layer(_COLEMAK);
-        #ifdef UNDERGLOW_ENABLE
-             rgblight_sethsv(180,255,255);
-        #endif
-        #ifdef RGBLIGHT_ENABLE 
-			rgblight_sethsv_noeeprom(HSV_GREEN);
-        #endif
       }
       return false;
       break;
     case QWERTY:
       if (record->event.pressed) {
         set_single_persistent_default_layer(_QWERTY);
-        #ifdef UNDERGLOW_ENABLE
-            rgblight_sethsv(40,255,255);
-        #endif
       }
       return false;
       break;
