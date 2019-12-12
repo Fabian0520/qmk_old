@@ -229,3 +229,24 @@ void oled_task_user(void){
     }
 }
 #endif
+
+
+layer_state_t layer_state_set_keymap (layer_state_t state) {
+    switch(biton32(state)){
+        case _SYM:
+            break;
+    return state;
+        case _MOV:
+            break;
+    return state;
+        case _ADJUST:
+            break;
+        default:
+            //rgblight_mode_noeeprom(30);
+            //rgblight_sethsv_master(208, 255, 255);
+            //rgblight_sethsv_slave(208, 255, 255);
+            break;
+    }
+    return state;
+}
+
