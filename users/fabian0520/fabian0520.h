@@ -30,6 +30,7 @@
 
 enum userspace_layers {
   _COLEMAK,
+  _GAME,
   _QWERTY,
   _NUM,
   _SYM, //Gleicher Layer wie FUNC1. Brauche ich nur um mit beiden Tasten in den ADJUST-Layer zu kommen.
@@ -49,6 +50,7 @@ enum tapdances{
 
 enum userspace_custom_keycodes {
   COLEMAK = SAFE_RANGE,
+  GAME,
   QWERTY,
   ADJUST,
   TMP,
@@ -56,6 +58,7 @@ enum userspace_custom_keycodes {
   NUM,
   MOV,
   MIDI,
+  DEL_EEPROM,
   //NUM_SPC = LT(_NUM, KC_SPACE),
   //MOV_ENT = LT(_MOV, KC_ENTER),
   i3_S_1,

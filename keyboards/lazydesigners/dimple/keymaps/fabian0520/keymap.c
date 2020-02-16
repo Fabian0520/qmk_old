@@ -41,6 +41,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                     KC_LCTL ,  KC_LGUI ,  KC_LALT ,  NUM_SPC ,  MOV_ENT ,  KC_RALT ,  KC_RGUI ,  KC_RCTL \
     ),
 
+ [_GAME] =LAYOUT( \
+        KC_ESC  ,   KC_Q   ,   KC_W   ,   KC_F   ,   KC_P   ,   KC_G   ,   KC_J   ,   KC_L   ,   KC_U   ,   KC_Y   ,  KC_SCLN , KC_BSPC  ,\
+        KC_TAB  ,   KC_A   ,   KC_R   ,   KC_S   ,   KC_T   ,   KC_D   ,   KC_H   ,   KC_N   ,   KC_E   ,   KC_I   ,   KC_O   , KC_DEL,\
+        KC_LSFT ,   KC_Z   ,   KC_X   ,   KC_C   ,   KC_V   ,   KC_B   ,   KC_K   ,   KC_M   ,  MY_COMM ,  KC_UP  ,OSM(MOD_LSFT),\
+                    KC_LCTL ,  KC_LGUI ,  KC_LALT ,  NUM_SPC ,  MOV_ENT , KC_LEFT ,  KC_DOWN ,  KC_RIGHT \
+    ),
+
 /* Qwerty
 * ,-----------------------------------------------------------------------------------.
 * |  ESC |   Q  |   W  |   E  |   R  |   T  |   Y  |   U  |   I  |   O  |   P  |  DEL |
@@ -138,8 +145,8 @@ KC_TRNS ,  KC_NO   ,  KC_NO   ,  KC_NO   ,  KC_NO   ,  KC_NO   ,  KC_NO   ,  i3_
 * `-----------------------------------------------------------------------------------'
 */
  [_ADJUST] =LAYOUT( \
-  SCRE_UP ,  QWERTY  ,  COLEMAK ,  X(STAR) ,   KC_NO  ,   KC_NO  ,  RGB_VAD ,  RGB_TOG ,  RGB_VAI , KC_VOLU  ,   KC_NO  ,  RESET ,\
-  SCRE_DN ,  UC_MOD  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,  RGB_HUD , RGB_MOD  ,  RGB_HUI , KC_VOLD  ,   KC_NO  , KC_NO ,\
+  SCRE_UP ,  DF(_QWERTY)  ,  DF(_COLEMAK) ,  X(STAR) ,   KC_NO  ,   KC_NO  ,  RGB_VAD ,  RGB_TOG ,  RGB_VAI , KC_VOLU  ,   KC_NO  ,  RESET ,\
+  SCRE_DN ,  UC_MOD  ,   DF(_GAME)   ,   KC_NO  ,   KC_NO  ,   KC_NO  ,  RGB_HUD , RGB_MOD  ,  RGB_HUI , KC_VOLD  ,   KC_NO  , DEL_EEPROM ,\
    KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,  RGB_SAD ,   KC_NO  ,  RGB_SAI , KC_MUTE  ,   KC_NO  ,\
              KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS \
  ),
@@ -153,20 +160,18 @@ KC_TRNS ,  KC_NO   ,  KC_NO   ,  KC_NO   ,  KC_NO   ,  KC_NO   ,  KC_NO   ,  i3_
    ),
    */
 
-// LED color settings
+// LED color settings !only works for layertab, momentary layers!
 layer_state_t layer_state_set_keymap (layer_state_t state) {
     switch(biton32(state)){
+        case _GAME:
+            break;
+        case _COLEMAK:
+            break;
         case _SYM:
             break;
-    return state;
         case _MOV:
             break;
-    return state;
         case _ADJUST:
-            break;
-        default:
-            rgblight_mode_noeeprom(30);
-            rgblight_sethsv_noeeprom(208, 255, 255);
             break;
     }
     return state;
@@ -180,6 +185,13 @@ if (IS_LED_ON(usb_led, USB_LED_CAPS_LOCK)) {
 	}
 }
 
+void keyboard_post_init_user(void) {
+    rgblight_enable_noeeprom();
+    rgblight_mode_noeeprom(30);
+    rgblight_sethsv_noeeprom(208, 255, 255);
+}
+
+
 /*
 bool process_record_keymap(uint16_t keycode, keyrecord_t *record){
     switch(keycode){
@@ -188,5 +200,30 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record){
             break;
     }
     return true;
+}
+
+
+bool process_record_keymap(uint16_t keycode, keyrecord_t *record){
+  switch (keycode) {
+// ------------------- Layer Code --------------------------------
+    case COLEMAK:
+      if (record->event.pressed) {
+        set_single_persistent_default_layer(_COLEMAK);
+        rgblight_mode_noeeprom(30);
+        rgblight_sethsv_noeeprom(208, 255, 255);
+      }
+      return false;
+      break;
+    case GAME:
+      if (record->event.pressed) {
+        set_single_persistent_default_layer(_GAME);
+        eeconfig_init();
+        rgblight_mode_noeeprom(3);
+        rgblight_sethsv_noeeprom(108, 215, 251);
+      }
+      return false;
+      break;
+  }
+  return true;
 }
 */
