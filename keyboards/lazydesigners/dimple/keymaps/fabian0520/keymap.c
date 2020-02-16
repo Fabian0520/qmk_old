@@ -163,11 +163,17 @@ KC_TRNS ,  KC_NO   ,  KC_NO   ,  KC_NO   ,  KC_NO   ,  KC_NO   ,  KC_NO   ,  i3_
 // LED color settings !only works for layertab, momentary layers!
 layer_state_t layer_state_set_keymap (layer_state_t state) {
     switch(biton32(state)){
-        case _GAME:
-            break;
         case _COLEMAK:
+            rgblight_mode_noeeprom(30);
+            rgblight_sethsv_noeeprom(208, 255, 255);
+            break;
+        case _GAME:
+            rgblight_sethsv_noeeprom(208, 255, 255);
+            rgblight_mode_noeeprom(10);
             break;
         case _SYM:
+            rgblight_sethsv_noeeprom(208, 255, 255);
+            rgblight_mode_noeeprom(10);
             break;
         case _MOV:
             break;
@@ -200,30 +206,5 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record){
             break;
     }
     return true;
-}
-
-
-bool process_record_keymap(uint16_t keycode, keyrecord_t *record){
-  switch (keycode) {
-// ------------------- Layer Code --------------------------------
-    case COLEMAK:
-      if (record->event.pressed) {
-        set_single_persistent_default_layer(_COLEMAK);
-        rgblight_mode_noeeprom(30);
-        rgblight_sethsv_noeeprom(208, 255, 255);
-      }
-      return false;
-      break;
-    case GAME:
-      if (record->event.pressed) {
-        set_single_persistent_default_layer(_GAME);
-        eeconfig_init();
-        rgblight_mode_noeeprom(3);
-        rgblight_sethsv_noeeprom(108, 215, 251);
-      }
-      return false;
-      break;
-  }
-  return true;
 }
 */
