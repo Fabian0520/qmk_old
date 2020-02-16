@@ -64,3 +64,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #if !defined(NO_PRINT) && !defined(CONSOLE_ENABLE)
 #define NO_PRINT
 #endif // !NO_PRINT
+//Bootmagic
+#define BOOTMAGIC_LITE_ROW 0
+#define BOOTMAGIC_LITE_COLUMN 11
