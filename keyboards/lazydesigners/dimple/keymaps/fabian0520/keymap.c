@@ -168,16 +168,16 @@ layer_state_t layer_state_set_keymap (layer_state_t state) {
             rgblight_sethsv_noeeprom(208, 255, 255);
             break;
         case _GAME:
-            rgblight_sethsv_noeeprom(208, 255, 255);
-            rgblight_mode_noeeprom(10);
             break;
         case _SYM:
-            rgblight_sethsv_noeeprom(208, 255, 255);
-            rgblight_mode_noeeprom(10);
             break;
         case _MOV:
             break;
         case _ADJUST:
+            rgblight_sethsv_noeeprom(208, 255, 255);
+            rgblight_mode_noeeprom(10 + 3);
+            break;
+        case _NUM:
             break;
     }
     return state;
@@ -195,8 +195,10 @@ void keyboard_post_init_user(void) {
     rgblight_enable_noeeprom();
     rgblight_mode_noeeprom(30);
     rgblight_sethsv_noeeprom(208, 255, 255);
+    //rgblight_mode_noeeprom(0);
+    //rgblight_setrgb_range(0, 0, 0, 0, 51);
+    //rgblight_setrgb_at(60, 125, 100, 50);
 }
-
 
 /*
 bool process_record_keymap(uint16_t keycode, keyrecord_t *record){
