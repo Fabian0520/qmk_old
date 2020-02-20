@@ -18,11 +18,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 
-[_COLEMAK] =LAYOUT_planck_grid( 
+[_COLEMAK] =LAYOUT_planck_2x2u( 
    KC_ESC ,  KC_Q   ,  KC_W   ,   KC_F  ,   KC_P   ,   KC_G   ,   KC_J   ,   KC_L   ,   KC_U   ,   KC_Y   , KC_SCLN  , KC_BSPC ,
    LT(_SYM,KC_TAB)  ,  KC_A   ,  KC_R   ,   KC_S   ,   KC_T   ,   KC_D   ,   KC_H   ,   KC_N   ,   KC_E   ,   KC_I   ,  KC_O    , KC_DEL  ,
    KC_LSFT,  KC_Z   ,  KC_X   ,   KC_C  ,   KC_V   ,   KC_B   ,   KC_K   ,   KC_M   ,  MY_COMM ,  MY_DOT  , KC_QUOT  , OSM(MOD_LSFT) ,
-   KC_MUTE,KC_LCTL  , KC_LGUI , KC_LALT ,  NUM_SPC ,  NUM_SPC ,  MOV_ENT ,  MOV_ENT , KC_RALT  ,  KC_RGUI , KC_RCTL  , KC_NO  
+   KC_MUTE,KC_LCTL  , KC_LGUI , KC_LALT ,  NUM_SPC ,  MOV_ENT , KC_RALT  ,  KC_RGUI , KC_RCTL  , KC_NO  
  ), 
 
 /* Qwerty
@@ -36,11 +36,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * | XXXX | LCTL | LGUI | LALT | NUM_SPACE   | MOV_ENTER   | RALT | RGUI | RCTL | XXXX |
  * `-----------------------------------------------------------------------------------'
  */
-[_QWERTY] =LAYOUT_planck_grid( 
+[_QWERTY] =LAYOUT_planck_2x2u( 
    KC_ESC ,  KC_Q   ,  KC_W   ,   KC_E   ,   KC_R   ,   KC_T   ,   KC_Y   ,   KC_U   ,   KC_I   ,   KC_O   , KC_P     , KC_BSPC ,
    KC_TAB ,  KC_A   ,  KC_S   ,   KC_D   ,   KC_F   ,   KC_G   ,   KC_H   ,   KC_J   ,   KC_K   ,   KC_L   , KC_SCLN  , KC_ENT  ,
    KC_LSFT,  KC_Z   ,  KC_X   ,   KC_C   ,   KC_V   ,   KC_B   ,   KC_N   ,   KC_M   ,  MY_COMM ,  MY_DOT  , KC_QUOT  , OSM(MOD_LSFT) ,
-   KC_NO  ,OSM_CTL  , OSM_GUI , OSM_ALT  ,  NUM_SPC ,  NUM_SPC ,  MOV_ENT ,  MOV_ENT , KC_RALT  ,  KC_RGUI , KC_RCTL  , KC_NO  
+   KC_NO  ,KC_LCTL  , KC_LGUI , KC_LALT  ,  NUM_SPC ,  MOV_ENT , KC_RALT  ,  KC_RGUI , KC_RCTL  , KC_NO  
  ), 
 
 /* TMP
@@ -54,11 +54,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |      |      |      |      |             |             |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
-[_TMP] =LAYOUT_planck_grid( 
+[_TMP] =LAYOUT_planck_2x2u( 
   KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS , KC_TRNS  ,
   KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS , KC_TRNS  ,
   KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS , KC_TRNS  ,
-  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS , KC_TRNS  
+  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS , KC_TRNS  
  ), 
 
 /* NUM
@@ -73,11 +73,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 
-[_NUM] =LAYOUT_planck_grid( 
+[_NUM] =LAYOUT_planck_2x2u( 
   KC_TRNS ,  MY_EURO ,  MY_PARA ,  MY_CIRC ,  KC_QUOT ,  KC_NO   , KC_SLASH ,   KC_7   ,   KC_8   ,   KC_9   ,  KC_ASTR , KC_TRNS ,
   KC_TRNS ,  S(KC_7) ,  S(KC_6) ,  S(KC_5) ,  S(KC_4) ,S(KC_MINS),  KC_COMM ,   KC_4   ,   KC_5   ,   KC_6   ,  KC_PLUS , KC_TRNS , 
   KC_TRNS ,S(KC_SLSH),  S(KC_3) ,  S(KC_2) , S(KC_1)  , KC_EQUAL ,   KC_0   ,   KC_1   ,   KC_2   ,   KC_3   , KC_MINUS , KC_TRNS , 
-  KC_TRNS ,  KC_TRNS ,  KC_TRNS , KC_TRNS  ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_DOT  , KC_TRNS  ,  KC_TRNS ,  KC_TRNS  
+  KC_TRNS ,  KC_TRNS ,  KC_TRNS , KC_TRNS  ,  KC_TRNS ,  KC_TRNS ,  KC_DOT  , KC_TRNS  ,  KC_TRNS ,  KC_TRNS  
  ), 
 
 /* SYM
@@ -91,11 +91,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |      |      |      |      |             |             |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
-[_SYM] =LAYOUT_planck_grid( 
+[_SYM] =LAYOUT_planck_2x2u( 
  KC_TRNS ,  KC_F12   , KC_F11   , KC_F10   , KC_F9    ,  KC_NO   , KC_PLUS  ,  KC_LBRC   , KC_RBRC  ,  KC_LT   ,  KC_GT   , KC_TRNS  , 
  KC_TRNS ,  KC_F8    , KC_F7    , KC_F6    , KC_F5    ,  KC_NO   , KC_MINUS ,  KC_LPRN   , KC_RPRN  ,  KC_LCBR , KC_RCBR  , KC_TRNS , 
  KC_TRNS ,  KC_F4    , KC_F3    , KC_F2    , KC_F1    ,  KC_NO   , KC_EQUAL ,  KC_PIPE   ,  KC_BSLS ,  KC_QUES ,  KC_GRAVE, KC_TRNS , 
- KC_TRNS ,  KC_TRNS  , KC_TRNS  , KC_TRNS  , KC_TRNS  , KC_TRNS  , KC_TRNS  ,  KC_TRNS   , KC_TRNS  , KC_TRNS  ,  KC_TRNS ,  KC_TRNS
+ KC_TRNS ,  KC_TRNS  , KC_TRNS  , KC_TRNS  , KC_TRNS  ,  KC_TRNS   , KC_TRNS  , KC_TRNS  ,  KC_TRNS ,  KC_TRNS
  ), 
 
 /* MOV
@@ -109,21 +109,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |      |      |      |      |             |             |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
-[_MOV] =LAYOUT_planck_grid(
+[_MOV] =LAYOUT_planck_2x2u(
   KC_TRNS ,  KC_PGUP ,  KC_HOME ,  KC_UP   ,  KC_END  ,  KC_NO   ,  KC_NO   ,  i3_S_7  ,  i3_S_8  ,  i3_S_9  ,  KC_NO   , KC_TRNS  ,
   KC_TRNS ,  KC_PGDN ,  KC_LEFT ,  KC_DOWN ,  KC_RGHT ,  KC_NO   ,  KC_NO   ,  i3_S_4  ,  i3_S_5  ,  i3_S_6  ,  KC_NO   , KC_TRNS  ,
   KC_TRNS ,  KC_NO   ,  KC_NO   ,  KC_NO   ,  KC_NO   ,  KC_NO   ,  KC_NO   ,  i3_S_1  ,  i3_S_2  ,  i3_S_3  ,  KC_NO   , KC_TRNS  ,
-  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS
+  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS
  ), 
 
-/*
- [_MIDI] =LAYOUT_planck_grid(
+ [_MIDI] =LAYOUT_planck_2x2u(
    KC_NO   ,   KC_NO   ,   MI_Cs   ,   MI_Ds   ,   KC_NO   ,   MI_Fs   ,   MI_Gs   ,   MI_As   ,   KC_NO   ,   KC_NO   ,   KC_NO   ,   KC_NO   ,
    KC_NO   ,    MI_C   ,    MI_D   ,    MI_E   ,    MI_F   ,    MI_G   ,    MI_A   ,    MI_B   ,   KC_NO   ,   KC_NO   ,   KC_NO   ,   KC_NO   ,
    KC_NO   ,   KC_NO   ,   KC_NO   ,   KC_NO   ,   KC_NO   ,   KC_NO   ,   KC_NO   ,   KC_NO   ,   KC_NO   ,   KC_NO   ,   KC_NO   ,   KC_NO   ,
-   KC_TRNS ,   KC_TRNS ,   KC_TRNS ,   KC_TRNS ,   KC_TRNS ,  KC_TRNS  ,  KC_TRNS  ,  KC_TRNS  ,  KC_TRNS  ,  KC_TRNS  ,  KC_TRNS  ,  KC_TRNS
+   KC_TRNS ,   KC_TRNS ,   KC_TRNS ,   KC_TRNS ,   KC_TRNS ,  KC_TRNS  ,  KC_TRNS  ,  KC_TRNS  ,  KC_TRNS  ,  KC_TRNS
    ),
-*/
+
 /* ADJUST
  * ,-----------------------------------------------------------------------------------.
  * |SC_UP |QWERTY|COLEMA| MIDI |      |      |      |      |      |      |      |VOL_UP|
@@ -135,11 +134,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |      |      |      |      |             |             |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
-[_ADJUST] =LAYOUT_planck_grid(
+[_ADJUST] =LAYOUT_planck_2x2u(
   SCRE_UP ,  QWERTY  ,  COLEMAK ,   MIDI   ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,  KC_VOLU ,
   SCRE_DN ,   MU_ON  ,   MU_OFF ,   MU_TOG ,  MU_MOD  ,  CK_TOGG ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,  KC_VOLD ,
   KC_TRNS ,   MI_ON  ,   MI_OFF ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,  KC_MUTE ,
-  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS , KC_TRNS  
+  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS            ,  KC_TRNS            ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS , KC_TRNS  
  ), 
 };
 

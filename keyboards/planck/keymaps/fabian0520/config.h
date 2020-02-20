@@ -29,6 +29,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                                 }
 #endif
 
+#define PREVENT_STUCK_MODIFIERS
+
 /*
  * MIDI options
  */
@@ -75,7 +77,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define i3_NAVIGATION_ENABLE
 #define CUSTOM_SHIFT_ENABLE
 //#define UNDERGLOW_ENABLE
-#define ESC_CAPS_ENABLE
 #define MIDI_ENABLE_STRICT 1
 #define MIDI_BASIC
 #define MIDI_ADVANCED
