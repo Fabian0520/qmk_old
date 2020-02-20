@@ -55,7 +55,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  ), 
 
 [_ADJUST] =LAYOUT(
-  SCRE_UP ,  QWERTY  ,  COLEMAK ,  KC_NO   ,   KC_NO  ,   KC_NO  ,  RGB_HUI ,  RGB_SAI ,  RGB_VAI ,  RGB_SPI ,   KC_NO  ,  KC_VOLU ,
+  SCRE_UP ,  DF(_QWERTY)  ,  DF(_COLEMAK) ,  KC_NO   ,   KC_NO  ,   KC_NO  ,  RGB_HUI ,  RGB_SAI ,  RGB_VAI ,  RGB_SPI ,   KC_NO  ,  KC_VOLU ,
   SCRE_DN , RGB_TOG  ,  RGB_MOD ,  KC_NO   ,   KC_NO  ,   KC_NO  ,  RGB_HUD ,  RGB_SAD ,  RGB_VAD ,  RGB_SPD ,   KC_NO  ,  KC_VOLD ,
    KC_NO  , RGB_RMOD ,   KC_NO  ,  KC_NO   ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,  KC_MUTE ,
                                    KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS 
