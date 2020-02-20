@@ -123,7 +123,7 @@ KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_
 */
 
  [_ADJUST] =LAYOUT( \
-  SCRE_UP ,  QWERTY  ,  COLEMAK ,  X(STAR) ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  , KC_VOLU  ,   KC_NO  ,  RESET ,\
+  SCRE_UP ,  DF(_QWERTY)  ,  DF(_COLEMAK) ,  X(STAR) ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  , KC_VOLU  ,   KC_NO  ,  RESET ,\
   SCRE_DN ,  UC_MOD  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  , KC_VOLD  ,   KC_NO  ,\
    KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  ,   KC_NO  , KC_MUTE  ,   KC_NO  ,\
   KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS ,  KC_TRNS \
